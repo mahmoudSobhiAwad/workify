@@ -14,6 +14,10 @@ class AppImages {
   /// assets/images/empty_state.svg
   static const String assetsImagesEmptyState = "assets/images/empty_state.svg";
 
+  /// Assets for assetsImagesHomeBackGround
+  /// assets/images/home_back_ground.svg
+  static const String assetsImagesHomeBackGround = "assets/images/home_back_ground.svg";
+
   /// Assets for assetsImagesMangerLogo
   /// assets/images/manger_logo.svg
   static const String assetsImagesMangerLogo = "assets/images/manger_logo.svg";
