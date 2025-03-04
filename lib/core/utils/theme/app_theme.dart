@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:workify/core/utils/constants/app_strings.dart';
+import 'package:workify/core/utils/theme/app_colors.dart';
 
 class AppTheme {
   static ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
     useMaterial3: true,
+    primaryColor: AppColors.purblePrimary,
+    scaffoldBackgroundColor: AppColors.scaffoldBackgroundColor,
 
     textTheme: TextTheme(
       bodyLarge: TextStyle(
@@ -24,15 +28,14 @@ class AppTheme {
     ),
     cardTheme: CardTheme(
       color: const Color(0xFF1E1E1E),
-      shadowColor: Colors.black.withOpacity(0.5),
+      shadowColor: Colors.black.withValues(alpha: 0.5),
       elevation: 4,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
     ),
-    // fontFamily: AppStrings.englishFontFamily,
+    fontFamily: AppStrings.englishFontFamily,
     // scaffoldBackgroundColor: AppColors.darkScaffoldBackgroundColor,
-    // primaryColor: AppColors.primary,
     // colorScheme: ColorScheme.fromSeed(
     //   seedColor: AppColors.primary,
     //   brightness: Brightness.dark,
