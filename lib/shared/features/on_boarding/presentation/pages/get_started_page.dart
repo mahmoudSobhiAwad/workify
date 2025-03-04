@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:workify/core/routing/routes.dart';
 import 'package:workify/core/utils/theme/app_colors.dart';
 import 'package:workify/core/utils/theme/app_font_stlyles.dart';
 import 'package:workify/core/utils/theme/app_images.dart';
@@ -51,12 +53,15 @@ class GetStartedPage extends StatelessWidget {
                 height: 40,
               ),
               CustomPushButton(
-                margin: EdgeInsets.symmetric(horizontal: 38,vertical: 40),
+                onTap: () {
+                  context.go(Routes.roleSelectPage);
+                },
+                margin: EdgeInsets.symmetric(horizontal: 38, vertical: 40),
                 backgroundColor: AppColors.purblePrimary,
                 child: Center(
                   child: Text(
                     "Get Started",
-                    style: AppFontStyle.semiBold18,
+                    style: AppFontStyle.semiBold16,
                   ),
                 ),
               )

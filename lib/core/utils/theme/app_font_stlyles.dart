@@ -5,6 +5,10 @@ abstract class AppFontStyle {
     fontWeight: FontWeight.bold,
     fontSize: 13,
   );
+  static const TextStyle bold21 = TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 21,
+  );
   static const TextStyle bold23 = TextStyle(
     fontWeight: FontWeight.bold,
     fontSize: 23,
