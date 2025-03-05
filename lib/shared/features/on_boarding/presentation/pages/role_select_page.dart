@@ -4,6 +4,7 @@ import 'package:workify/core/utils/theme/app_colors.dart';
 import 'package:workify/core/utils/theme/app_font_stlyles.dart';
 import 'package:workify/core/utils/theme/app_icons.dart';
 import 'package:workify/core/utils/theme/app_images.dart';
+import 'package:workify/features/employee/company_select/presentation/company_select_page.dart';
 import 'package:workify/shared/features/on_boarding/presentation/widgets/custom_push_button.dart';
 import 'package:workify/shared/models/role_model.dart';
 
@@ -79,6 +80,9 @@ class _RoleSelectPageState extends State<RoleSelectPage> {
               ),
             ),
             CustomPushButton(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => CompanySelectPage()));
+              },
               margin: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
               backgroundColor: AppColors.purblePrimary,
               child: Row(
