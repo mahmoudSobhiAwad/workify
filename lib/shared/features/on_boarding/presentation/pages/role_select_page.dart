@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:workify/core/routing/routes.dart';
 import 'package:workify/core/utils/theme/app_colors.dart';
 import 'package:workify/core/utils/theme/app_font_stlyles.dart';
 import 'package:workify/core/utils/theme/app_icons.dart';
@@ -79,6 +81,13 @@ class _RoleSelectPageState extends State<RoleSelectPage> {
               ),
             ),
             CustomPushButton(
+              onTap: () {
+                if (_selectedRole == 0) {
+                  context.go(Routes.adminHome);
+                } else {
+                  //TODO edit to go to employee
+                }
+              },
               margin: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
               backgroundColor: AppColors.purblePrimary,
               child: Row(
