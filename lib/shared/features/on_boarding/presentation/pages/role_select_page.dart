@@ -6,6 +6,7 @@ import 'package:workify/core/utils/theme/app_colors.dart';
 import 'package:workify/core/utils/theme/app_font_stlyles.dart';
 import 'package:workify/core/utils/theme/app_icons.dart';
 import 'package:workify/core/utils/theme/app_images.dart';
+import 'package:workify/features/admin/company/presentation/pages/company_page_view.dart';
 import 'package:workify/features/admin/home/presentation/pages/admin_home.dart';
 import 'package:workify/features/admin/users/presentation/pages/user_page_view.dart';
 import 'package:workify/shared/features/basic_preview/data/models/bottom_nav_bar_model.dart';
@@ -90,7 +91,7 @@ class _RoleSelectPageState extends State<RoleSelectPage> {
                     "pages": [
                       AdminHomePage(),
                       UserPageView(),
-                      SizedBox(),
+                      CompanyPageView(),
                       SizedBox(),
                     ],
                     "bottomNavList": [

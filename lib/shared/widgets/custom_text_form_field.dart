@@ -139,15 +139,15 @@ class CustomTextFormField extends StatelessWidget {
               ),
           onFieldSubmitted: onFieldSubmitted,
           decoration: InputDecoration(
-            fillColor: fillColor,
+            fillColor: fillColor??AppColors.black50,
             filled: enableFill,
             isDense: isDense,
             counterText: "",
             hintText: hintText,
-            hintStyle: hintStyle ?? AppFontStyle.regular12.copyWith(color: AppColors.grayE0),
+            hintStyle: hintStyle ?? AppFontStyle.medium14.copyWith(color: AppColors.grayE0),
             contentPadding: contentPadding ??
                 EdgeInsetsDirectional.only(
-                    start: 12, end: 4, bottom: 10, top: 10),
+                    start: 12, end: 4, bottom: 20, top: 20),
             alignLabelWithHint: true,
             labelText: label,
             labelStyle: labelStyle ??

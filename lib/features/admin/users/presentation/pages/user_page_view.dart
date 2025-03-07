@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:workify/core/routing/routes.dart';
 import 'package:workify/core/utils/theme/app_colors.dart';
 import 'package:workify/core/utils/theme/app_font_stlyles.dart';
 import 'package:workify/core/utils/theme/app_icons.dart';
@@ -29,6 +31,7 @@ class UserPageView extends StatelessWidget {
                   child: CustomTextFormField(
                 fillColor: AppColors.whiteWithOpacity10,
                 borderRadius: 4,
+                contentPadding: EdgeInsetsDirectional.all(12),
                 prefixWidget: SvgPicture.asset(
                   AppIcons.assetsIconsSearchIcon,
                   fit: BoxFit.scaleDown,
@@ -36,7 +39,9 @@ class UserPageView extends StatelessWidget {
                 hintText: "Search",
               )),
               CustomPushButton(
-                onTap: () {},
+                onTap: () {
+                  context.push(Routes.updateUser);
+                },
                 borderRadius: 4,
                 padding: EdgeInsets.all(12),
                 height: 43,
