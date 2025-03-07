@@ -6,6 +6,8 @@ import 'package:workify/core/utils/theme/app_colors.dart';
 import 'package:workify/core/utils/theme/app_font_stlyles.dart';
 import 'package:workify/core/utils/theme/app_icons.dart';
 import 'package:workify/core/utils/theme/app_images.dart';
+import 'package:workify/features/admin/home/presentation/pages/admin_home.dart';
+import 'package:workify/shared/features/basic_preview/data/models/bottom_nav_bar_model.dart';
 import 'package:workify/shared/features/on_boarding/presentation/widgets/custom_push_button.dart';
 import 'package:workify/shared/models/role_model.dart';
 
@@ -83,7 +85,32 @@ class _RoleSelectPageState extends State<RoleSelectPage> {
             CustomPushButton(
               onTap: () {
                 if (_selectedRole == 0) {
-                  context.go(Routes.adminHome);
+                  context.go(Routes.basicPreview, extra: {
+                    "pages": [
+                      AdminHomePage(),
+                      SizedBox(),
+                      SizedBox(),
+                      SizedBox(),
+                    ],
+                    "bottomNavList": [
+                      BottomNavBarModel(
+                          activeItemPath: AppIcons.assetsIconsHomeSelected,
+                          nonActiveItemPath:
+                              AppIcons.assetsIconsHomeNotSelected),
+                      BottomNavBarModel(
+                          activeItemPath: AppIcons.assetsIconsUsersSelected,
+                          nonActiveItemPath:
+                              AppIcons.assetsIconsUsersNotSelected),
+                      BottomNavBarModel(
+                          activeItemPath: AppIcons.assetsIconsCompanySelected,
+                          nonActiveItemPath:
+                              AppIcons.assetsIconsCompanyNotSelected),
+                      BottomNavBarModel(
+                          activeItemPath: AppIcons.assetsIconsSelectedSetting,
+                          nonActiveItemPath:
+                              AppIcons.assetsIconsSettingNotSelected),
+                    ],
+                  });
                 } else {
                   //TODO edit to go to employee
                 }

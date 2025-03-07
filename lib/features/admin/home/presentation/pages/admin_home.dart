@@ -8,50 +8,46 @@ class AdminHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(child: QuickOverView()),
-            SliverToBoxAdapter(child: SizedBox(height: 20)),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Day Movements',
-                      style: AppFontStyle.bold19,
-                    ),
-                    Text(
-                      'See All',
-                      style: AppFontStyle.regular14Purple,
-                    ),
-                  ],
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(child: QuickOverView()),
+        SliverToBoxAdapter(child: SizedBox(height: 20)),
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Day Movements',
+                  style: AppFontStyle.bold19,
                 ),
-              ),
+                Text(
+                  'See All',
+                  style: AppFontStyle.regular14Purple,
+                ),
+              ],
             ),
-            SliverToBoxAdapter(child: SizedBox(height: 18)),
-            SliverList.separated(
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                return MovementItem(
-                  name: 'ahmed',
-                  inTime: '8:00 AM',
-                  outTime: '3:00 PM',
-                );
-              },
-              separatorBuilder: (context, index) {
-                return SizedBox(
-                  height: 12,
-                );
-              },
-            ),
-            SliverToBoxAdapter(child: SizedBox(height: 12)),
-          ],
+          ),
         ),
-      ),
+        SliverToBoxAdapter(child: SizedBox(height: 18)),
+        SliverList.separated(
+          itemCount: 10,
+          itemBuilder: (context, index) {
+            return MovementItem(
+              name: 'ahmed',
+              inTime: '8:00 AM',
+              outTime: '3:00 PM',
+            );
+          },
+          separatorBuilder: (context, index) {
+            return SizedBox(
+              height: 12,
+            );
+          },
+        ),
+        SliverToBoxAdapter(child: SizedBox(height: 12)),
+      ],
     );
   }
 }
