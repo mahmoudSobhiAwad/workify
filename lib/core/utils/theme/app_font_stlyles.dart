@@ -30,6 +30,7 @@ abstract class AppFontStyle {
 
   static const TextStyle bold16 = TextStyle(
     fontWeight: FontWeight.bold,
+    color: Colors.white,
     fontSize: 16,
   );
 

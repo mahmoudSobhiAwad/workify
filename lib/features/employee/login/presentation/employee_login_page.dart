@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:workify/core/routing/routes.dart';
 
 import '../../../../core/utils/theme/app_colors.dart';
 import '../../../../core/utils/theme/app_font_stlyles.dart';
@@ -44,7 +46,7 @@ class _EmployeeLoginPageState extends State<EmployeeLoginPage> {
               height: 50,
             ),
             Form(
-              key: formKey,
+                key: formKey,
                 child: Column(
                   children: [
                     Align(
@@ -61,7 +63,8 @@ class _EmployeeLoginPageState extends State<EmployeeLoginPage> {
                       controller: emailController,
                       decoration: InputDecoration(
                         hintText: "Email",
-                        hintStyle: TextStyle(color: Colors.grey.shade500, fontSize: 16),
+                        hintStyle: TextStyle(
+                            color: Colors.grey.shade500, fontSize: 16),
                         filled: true,
                         fillColor: AppColors.black50,
                         errorStyle: TextStyle(color: AppColors.red35),
@@ -75,7 +78,8 @@ class _EmployeeLoginPageState extends State<EmployeeLoginPage> {
                               width: 2,
                             ),
                             borderRadius: BorderRadius.circular(10)),
-                        contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                       ),
                       keyboardType: TextInputType.emailAddress,
                       validator: (value) {
@@ -93,7 +97,8 @@ class _EmployeeLoginPageState extends State<EmployeeLoginPage> {
                       obscureText: hiddenPassword,
                       decoration: InputDecoration(
                         hintText: "Password",
-                        hintStyle: TextStyle(color: Colors.grey.shade500, fontSize: 16),
+                        hintStyle: TextStyle(
+                            color: Colors.grey.shade500, fontSize: 16),
                         filled: true,
                         fillColor: AppColors.black50,
                         errorStyle: TextStyle(color: AppColors.red35),
@@ -107,7 +112,8 @@ class _EmployeeLoginPageState extends State<EmployeeLoginPage> {
                               onPressed: () {
                                 togglePassword();
                               },
-                              icon: SvgPicture.asset(AppIcons.assetsIconsEyeClosed)),
+                              icon: SvgPicture.asset(
+                                  AppIcons.assetsIconsEyeClosed)),
                         ),
                         focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -116,7 +122,7 @@ class _EmployeeLoginPageState extends State<EmployeeLoginPage> {
                             ),
                             borderRadius: BorderRadius.circular(10)),
                         contentPadding:
-                        EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                            EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                       ),
                       keyboardType: TextInputType.visiblePassword,
                       validator: (value) {
@@ -133,14 +139,18 @@ class _EmployeeLoginPageState extends State<EmployeeLoginPage> {
                       height: 20,
                     ),
                     CustomPushButton(
-                      onTap: (){
-                        if(formKey.currentState!.validate()){
+                      onTap: () {
+                        //just for design now
+                        context.go(Routes.settingsPage);
+                        if (formKey.currentState!.validate()) {
                           debugPrint("Login");
+                          context.go(Routes.homePage);
                         } else {
                           // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please fill all the fields")));
                         }
                       },
-                      margin: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+                      margin:
+                          EdgeInsets.symmetric(horizontal: 24, vertical: 20),
                       backgroundColor: AppColors.purblePrimary,
                       child: Row(
                         spacing: 5,
@@ -156,8 +166,7 @@ class _EmployeeLoginPageState extends State<EmployeeLoginPage> {
                       ),
                     )
                   ],
-                )
-            ),
+                )),
           ],
         ),
       ),

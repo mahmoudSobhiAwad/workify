@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workify/core/routing/routes.dart';
+import 'package:workify/features/employee/finger_print/presentation/pages/finger_print_page.dart';
+import 'package:workify/features/employee/home/presentation/pages/home_page.dart';
 import 'package:workify/shared/features/on_boarding/presentation/pages/get_started_page.dart';
 import 'package:workify/shared/features/on_boarding/presentation/pages/role_select_page.dart';
+import 'package:workify/shared/features/settings/presentation/pages/settings_page.dart';
 
 final GoRouter router = GoRouter(
   // initialLocation: AppSharedPreferences.sharedPreferences
@@ -28,6 +31,46 @@ final GoRouter router = GoRouter(
       pageBuilder: (context, state) => CustomTransitionPage(
         key: state.pageKey,
         child: const RoleSelectPage(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return FadeTransition(
+            opacity: animation,
+            child: child,
+          );
+        },
+      ),
+      
+    ),
+     GoRoute(
+      path: Routes.fingerPrintPage,
+      pageBuilder: (context, state) => CustomTransitionPage(
+        key: state.pageKey,
+        child: const FingerPrint(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return FadeTransition(
+            opacity: animation,
+            child: child,
+          );
+        },
+      ),
+    ),
+      GoRoute(
+      path: Routes.homePage,
+      pageBuilder: (context, state) => CustomTransitionPage(
+        key: state.pageKey,
+        child: const HomePage(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return FadeTransition(
+            opacity: animation,
+            child: child,
+          );
+        },
+      ),
+    ),
+    GoRoute(
+      path: Routes.settingsPage,
+      pageBuilder: (context, state) => CustomTransitionPage(
+        key: state.pageKey,
+        child: const SettingPage(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return FadeTransition(
             opacity: animation,
