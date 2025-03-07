@@ -19,8 +19,6 @@ class AttendanceContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 102,
-      height: 103,
       decoration: BoxDecoration(
         color: AppColors.whiteWithOpacity10,
         borderRadius: BorderRadius.all(
@@ -28,7 +26,7 @@ class AttendanceContainer extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(5.0),
+        padding: const EdgeInsets.all(11.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
