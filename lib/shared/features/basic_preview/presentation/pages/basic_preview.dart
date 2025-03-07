@@ -18,6 +18,7 @@ class _BasicPreviewState extends State<BasicPreview> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
           child: Stack(
         alignment: Alignment.bottomCenter,
@@ -30,7 +31,7 @@ class _BasicPreviewState extends State<BasicPreview> {
           ),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 34, vertical: 10),
-            padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+            padding: EdgeInsets.symmetric(horizontal: 25, vertical: 12),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(16)),
                 boxShadow: [

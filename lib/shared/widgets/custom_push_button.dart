@@ -17,7 +17,6 @@ class CustomPushButton extends StatelessWidget {
     this.shadowColor,
     this.surfaceTintColor,
     this.progressColor,
-    this.borderRadius,
   });
 
   final EdgeInsets? margin;
@@ -32,37 +31,33 @@ class CustomPushButton extends StatelessWidget {
   final Color? shadowColor;
   final Color? surfaceTintColor;
   final Color? progressColor;
-  final double?borderRadius;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: margin ?? EdgeInsets.zero,
       child: SizedBox(
-        height: height ?? 56,
+        height: height ?? 52,
         child: ElevatedButton(
           onPressed: isLoading ? null : onTap,
           style: ElevatedButton.styleFrom(
             elevation: 0,
-            surfaceTintColor: surfaceTintColor ?? AppColors.scaffoldBackgroundColor,
-            overlayColor: overlayColor ?? AppColors.scaffoldBackgroundColor,
+            surfaceTintColor: surfaceTintColor ?? AppColors.black50,
+            overlayColor: overlayColor ?? AppColors.black50,
             disabledBackgroundColor: backgroundColor,
-            backgroundColor: backgroundColor ?? AppColors.scaffoldBackgroundColor,
+            backgroundColor: backgroundColor ?? AppColors.purblePrimary,
             padding: padding ??
-                const EdgeInsets.symmetric(
-                  vertical: 17,
-                ),
+                const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(borderRadius?? 12),
+              borderRadius: BorderRadius.circular(2),
               side: border ?? BorderSide.none,
             ),
-            shadowColor:
-                shadowColor ?? AppColors.scaffoldBackgroundColor, // Removes shadow effect
+            shadowColor: shadowColor ?? AppColors.black50,
           ),
           child: isLoading
               ? Center(
                   child: CupertinoActivityIndicator(
                     radius: 15,
-                    color: progressColor ?? AppColors.whiteff,
+                    color: progressColor ?? AppColors.black50,
                   ),
                 )
               : child,

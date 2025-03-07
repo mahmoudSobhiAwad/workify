@@ -15,6 +15,10 @@ abstract class AppFontStyle {
     fontWeight: FontWeight.bold,
     fontSize: 21,
   );
+  static const TextStyle bold22 = TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 22,
+  );
   static const TextStyle bold23 = TextStyle(
     fontWeight: FontWeight.bold,
     fontSize: 23,
@@ -103,10 +107,9 @@ abstract class AppFontStyle {
     fontSize: 14,
   );
   static const TextStyle regular14Purple = TextStyle(
-    fontWeight: FontWeight.normal,
-    fontSize: 14,
-    color: AppColors.purblePrimary
-  );
+      fontWeight: FontWeight.normal,
+      fontSize: 14,
+      color: AppColors.purblePrimary);
 
   static const TextStyle regular11 = TextStyle(
     fontWeight: FontWeight.normal,
