@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workify/core/routing/routes.dart';
+import 'package:workify/features/employee/finger_print/presentation/pages/finger_print_page.dart';
+import 'package:workify/features/employee/home/presentation/pages/home_page.dart';
+import 'package:workify/shared/features/settings/presentation/pages/settings_page.dart';
+import 'package:workify/shared/models/bottom_nav_model.dart';
 
 import '../../../../core/utils/theme/app_colors.dart';
 import '../../../../core/utils/theme/app_font_stlyles.dart';
@@ -141,10 +145,9 @@ class _EmployeeLoginPageState extends State<EmployeeLoginPage> {
                     CustomPushButton(
                       onTap: () {
                         //just for design now
-                        context.go(Routes.settingsPage);
+                        _navigateToHome();
                         if (formKey.currentState!.validate()) {
-                          debugPrint("Login");
-                          context.go(Routes.homePage);
+                          _navigateToHome();
                         } else {
                           // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please fill all the fields")));
                         }
@@ -176,5 +179,26 @@ class _EmployeeLoginPageState extends State<EmployeeLoginPage> {
   togglePassword() {
     hiddenPassword = !hiddenPassword;
     setState(() {});
+  }
+
+  _navigateToHome() {
+    context.go(Routes.basicPage, extra: {
+      "pages": [
+        FingerPrint(),
+        HomePage(),
+        SettingPage(),
+      ],
+      "bottomNavList": [
+        BottomNavBarModel(
+            activeItemPath: AppIcons.assetsIconsFingerPrintSelected,
+            nonActiveItemPath: AppIcons.assetsIconsFingerPrintNotSelected),
+        BottomNavBarModel(
+            activeItemPath: AppIcons.assetsIconsHomeSelected,
+            nonActiveItemPath: AppIcons.assetsIconsHomeNotSelected),
+        BottomNavBarModel(
+            activeItemPath: AppIcons.assetsIconsSelectedSetting,
+            nonActiveItemPath: AppIcons.assetsIconsSettingNotSelected),
+      ],
+    });
   }
 }

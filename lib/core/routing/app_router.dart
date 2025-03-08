@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workify/core/routing/routes.dart';
+import 'package:workify/features/employee/basic_screen.dart';
 import 'package:workify/features/employee/finger_print/presentation/pages/finger_print_page.dart';
 import 'package:workify/features/employee/home/presentation/pages/home_page.dart';
 import 'package:workify/shared/features/on_boarding/presentation/pages/get_started_page.dart';
 import 'package:workify/shared/features/on_boarding/presentation/pages/role_select_page.dart';
 import 'package:workify/shared/features/settings/presentation/pages/settings_page.dart';
+import 'package:workify/shared/models/bottom_nav_model.dart';
 
 final GoRouter router = GoRouter(
   // initialLocation: AppSharedPreferences.sharedPreferences
@@ -38,9 +40,8 @@ final GoRouter router = GoRouter(
           );
         },
       ),
-      
     ),
-     GoRoute(
+    GoRoute(
       path: Routes.fingerPrintPage,
       pageBuilder: (context, state) => CustomTransitionPage(
         key: state.pageKey,
@@ -53,7 +54,7 @@ final GoRouter router = GoRouter(
         },
       ),
     ),
-      GoRoute(
+    GoRoute(
       path: Routes.homePage,
       pageBuilder: (context, state) => CustomTransitionPage(
         key: state.pageKey,
@@ -79,5 +80,25 @@ final GoRouter router = GoRouter(
         },
       ),
     ),
+    GoRoute(
+        path: Routes.basicPage,
+        pageBuilder: (context, state) {
+          final args = state.extra as Map;
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: BasicScreen(
+              pages: args['pages'] as List<Widget>,
+              bottomNavBarIconsList:
+                  args['bottomNavList'] as List<BottomNavBarModel>,
+            ),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+          );
+        }),
   ],
 );
