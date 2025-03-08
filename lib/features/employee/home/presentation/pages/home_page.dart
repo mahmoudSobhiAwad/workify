@@ -92,7 +92,12 @@ class HomePage extends StatelessWidget {
             SizedBox(height: 20),
             Expanded(
               child: ListView(
-                padding: EdgeInsets.symmetric(horizontal: 16),
+                padding: EdgeInsets.only(
+                  left: 16,
+                  right: 16,
+                  bottom:
+                      80, // Added bottom padding to account for bottom nav bar
+                ),
                 children: [
                   MovementItem(
                     name: 'ahmed',
