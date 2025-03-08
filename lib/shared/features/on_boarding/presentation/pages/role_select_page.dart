@@ -8,6 +8,7 @@ import 'package:workify/core/utils/theme/app_icons.dart';
 import 'package:workify/core/utils/theme/app_images.dart';
 import 'package:workify/features/admin/company/presentation/pages/company_page_view.dart';
 import 'package:workify/features/admin/home/presentation/pages/admin_home.dart';
+import 'package:workify/features/admin/login/presentation/login_page.dart';
 import 'package:workify/features/admin/users/presentation/pages/user_page_view.dart';
 import 'package:workify/shared/features/basic_preview/data/models/bottom_nav_bar_model.dart';
 import 'package:workify/shared/features/on_boarding/presentation/widgets/custom_push_button.dart';
@@ -87,7 +88,8 @@ class _RoleSelectPageState extends State<RoleSelectPage> {
             CustomPushButton(
               onTap: () {
                 if (_selectedRole == 0) {
-                  context.go(Routes.basicPreview, extra: {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => AdminLoginPage()));
+                  /*context.go(Routes.basicPreview, extra: {
                     "pages": [
                       AdminHomePage(),
                       UserPageView(),
@@ -112,7 +114,7 @@ class _RoleSelectPageState extends State<RoleSelectPage> {
                           nonActiveItemPath:
                               AppIcons.assetsIconsSettingNotSelected),
                     ],
-                  });
+                  });*/
                 } else {
                   //TODO edit to go to employee
                 }
