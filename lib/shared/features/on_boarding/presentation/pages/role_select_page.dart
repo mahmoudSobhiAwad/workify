@@ -12,6 +12,7 @@ import 'package:workify/features/admin/login/presentation/login_page.dart';
 import 'package:workify/features/admin/users/presentation/pages/user_page_view.dart';
 import 'package:workify/shared/features/basic_preview/data/models/bottom_nav_bar_model.dart';
 import 'package:workify/shared/features/on_boarding/presentation/widgets/custom_push_button.dart';
+import 'package:workify/shared/features/settings/presentation/pages/settings_view.dart';
 import 'package:workify/shared/models/role_model.dart';
 
 class RoleSelectPage extends StatefulWidget {
@@ -94,7 +95,7 @@ class _RoleSelectPageState extends State<RoleSelectPage> {
                       AdminHomePage(),
                       UserPageView(),
                       CompanyPageView(),
-                      SizedBox(),
+                      SettingView(),
                     ],
                     "bottomNavList": [
                       BottomNavBarModel(
