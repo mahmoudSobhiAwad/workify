@@ -5,16 +5,26 @@ import 'package:workify/shared/features/basic_preview/data/models/bottom_nav_bar
 
 class BasicPreview extends StatefulWidget {
   const BasicPreview(
-      {super.key, required this.pages, required this.bottomNavBarIconsList});
+      {super.key,
+      required this.pages,
+      required this.bottomNavBarIconsList,
+      this.initialIndex = 0});
   final List<Widget> pages;
   final List<BottomNavBarModel> bottomNavBarIconsList;
+  final int initialIndex;
 
   @override
   State<BasicPreview> createState() => _BasicPreviewState();
 }
 
 class _BasicPreviewState extends State<BasicPreview> {
-  int _selectedIndex = 0;
+  late int _selectedIndex;
+  @override
+  void initState() {
+    _selectedIndex = widget.initialIndex;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

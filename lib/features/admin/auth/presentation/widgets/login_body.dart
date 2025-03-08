@@ -4,16 +4,13 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:toastification/toastification.dart';
 import 'package:workify/core/constants/admin_home_nav_bar_list.dart';
+import 'package:workify/core/constants/admin_home_pages.dart';
 import 'package:workify/core/routing/routes.dart';
 import 'package:workify/core/utils/theme/app_colors.dart';
 import 'package:workify/core/utils/theme/app_font_stlyles.dart';
 import 'package:workify/core/utils/theme/app_icons.dart';
 import 'package:workify/features/admin/auth/presentation/cubit/login/login_cubit.dart';
-import 'package:workify/features/admin/company/presentation/pages/company_page_view.dart';
-import 'package:workify/features/admin/home/presentation/pages/admin_home.dart';
-import 'package:workify/features/admin/users/presentation/pages/user_page_view.dart';
 import 'package:workify/shared/features/on_boarding/presentation/widgets/custom_push_button.dart';
-import 'package:workify/shared/features/settings/presentation/pages/settings_view.dart';
 import 'package:workify/shared/functions/custom_toaster.dart';
 import 'package:workify/shared/widgets/custom_text_form_field.dart';
 
@@ -113,13 +110,8 @@ class _LoginBodyState extends State<LoginBody> {
                           description: state.errMessage)
                       .showBottomToast();
                 } else if (state is SuccessLoginState) {
-                  context.go(Routes.basicPreview, extra: {
-                    "pages": [
-                      AdminHomePage(),
-                      UserPageView(),
-                      CompanyPageView(),
-                      SettingView(),
-                    ],
+                  context.go(Routes.basicPreviewAdmin, extra: {
+                    "pages": adminHomePages,
                     "bottomNavList": adminHomeNavBarList,
                   });
                 }
