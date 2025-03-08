@@ -9,9 +9,17 @@ import 'package:workify/shared/features/on_boarding/presentation/widgets/custom_
 import 'package:workify/shared/widgets/custom_app_bar.dart';
 import 'package:workify/shared/widgets/custom_text_form_field.dart';
 
-class CompanySetupView extends StatelessWidget {
+class CompanySetupView extends StatefulWidget {
   const CompanySetupView({super.key});
 
+  @override
+  State<CompanySetupView> createState() => _CompanySetupViewState();
+}
+
+class _CompanySetupViewState extends State<CompanySetupView> {
+  CalendarFormat _calendarFormat = CalendarFormat.month;
+  DateTime _focusedDay = DateTime.now();
+  Set<DateTime> _selectedDates = {};
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,12 +126,32 @@ class CompanySetupView extends StatelessWidget {
                   child: ColoredBox(
                     color: AppColors.black50,
                     child: TableCalendar(
-                        
-                        calendarFormat: CalendarFormat.month,
-                        focusedDay: DateTime.now(),
-                        firstDay: DateTime.now(),
-                        lastDay: DateTime(
-                            DateTime.now().year, DateTime.now().month + 1)),
+                      calendarFormat: _calendarFormat,
+                      focusedDay: _focusedDay,
+                      firstDay: DateTime.now(),
+                      lastDay: DateTime.now().add(Duration(days: 30)),
+                      selectedDayPredicate: (day) {
+                        return _selectedDates.contains(day);
+                      },
+                      onDaySelected: (selectedDay, focusedDay) {
+                        setState(() {
+                          if (_selectedDates.contains(selectedDay)) {
+                            _selectedDates.remove(selectedDay);
+                          } else {
+                            _selectedDates.add(selectedDay);
+                          }
+                          _focusedDay = focusedDay;
+                        });
+                      },
+                      onFormatChanged: (format) {
+                        setState(() {
+                          _calendarFormat = format;
+                        });
+                      },
+                      onPageChanged: (focusedDay) {
+                        _focusedDay = focusedDay;
+                      },
+                    ),
                   ),
                 ),
               ],
