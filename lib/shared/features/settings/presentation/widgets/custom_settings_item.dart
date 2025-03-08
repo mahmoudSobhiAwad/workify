@@ -3,12 +3,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:workify/core/utils/theme/app_font_stlyles.dart';
 
 class CustomSettingsItem extends StatelessWidget {
-  CustomSettingsItem(
+  const CustomSettingsItem(
       {required this.label,
       required this.iconPath,
       this.suffixIcon,
       super.key});
-  String? suffixIcon;
+  final String? suffixIcon;
   final String label;
   final String iconPath;
   @override
@@ -24,7 +24,7 @@ class CustomSettingsItem extends StatelessWidget {
           style: AppFontStyle.regular16,
         ),
         Spacer(),
-        SvgPicture.asset(suffixIcon.toString()),
+        if (suffixIcon != null) SvgPicture.asset(suffixIcon!),
       ],
     );
   }

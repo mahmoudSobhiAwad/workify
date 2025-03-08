@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:workify/core/utils/theme/app_colors.dart';
 import 'package:workify/core/utils/theme/app_font_stlyles.dart';
 import 'package:workify/core/utils/theme/app_icons.dart';
+import 'package:workify/shared/features/settings/presentation/widgets/custom_settings_item.dart';
 
-import '../widgets/custom_settings_item.dart';
 
 class SettingView extends StatelessWidget {
   const SettingView({super.key});

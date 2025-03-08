@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workify/core/routing/routes.dart';
+import 'package:workify/features/admin/auth/presentation/pages/admin_login_view.dart';
+import 'package:workify/features/admin/auth/presentation/pages/admin_sign_up_view.dart';
 import 'package:workify/features/admin/company/presentation/pages/company_setup_view.dart';
 import 'package:workify/features/admin/users/presentation/pages/update_user_view.dart';
 import 'package:workify/shared/features/basic_preview/data/models/bottom_nav_bar_model.dart';
@@ -83,6 +85,38 @@ final GoRouter router = GoRouter(
           return CustomTransitionPage(
             key: state.pageKey,
             child: CompanySetupView(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+          );
+        }),
+    GoRoute(
+        path: Routes.adminLogin,
+        pageBuilder: (context, state) {
+          // final args = state.extra as Map;
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: AdminLoginPage(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+          );
+        }),
+    GoRoute(
+        path: Routes.adminSignUp,
+        pageBuilder: (context, state) {
+          // final args = state.extra as Map;
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: AdminSignupPage(),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
               return FadeTransition(
