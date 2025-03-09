@@ -1,6 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:workify/core/constants/admin_home_nav_bar_list.dart';
+import 'package:workify/core/constants/admin_home_pages.dart';
 import 'package:workify/core/routing/routes.dart';
+import 'package:workify/core/storage/cache_helper.dart';
+import 'package:workify/core/utils/constants/app_strings.dart';
+import 'package:workify/core/utils/constants/enums.dart';
 import 'package:workify/features/admin/auth/presentation/pages/admin_login_view.dart';
 import 'package:workify/features/admin/auth/presentation/pages/admin_sign_up_view.dart';
 import 'package:workify/features/admin/company/presentation/pages/company_setup_view.dart';
@@ -11,9 +18,8 @@ import 'package:workify/shared/features/on_boarding/presentation/pages/get_start
 import 'package:workify/shared/features/on_boarding/presentation/pages/role_select_page.dart';
 
 final GoRouter router = GoRouter(
-  // initialLocation: AppSharedPreferences.sharedPreferences
-  //         .containsKey(AppStrings.refreshToken)
-  initialLocation: Routes.getStartedPage,
+  initialLocation: getInitalRoute(),
+  // initialLocation: Routes.getStartedPage,
   // Routes.login,
   routes: [
     GoRoute(
@@ -43,15 +49,39 @@ final GoRouter router = GoRouter(
       ),
     ),
     GoRoute(
-        path: Routes.basicPreview,
+        path: Routes.basicPreviewAdmin,
         pageBuilder: (context, state) {
-          final args = state.extra as Map;
+          final args = state.extra as Map?;
           return CustomTransitionPage(
             key: state.pageKey,
             child: BasicPreview(
-              pages: args['pages'] as List<Widget>,
+              initialIndex: args?[AppStrings.initalIndex] ?? 0,
+              pages: adminHomePages,
+              bottomNavBarIconsList: adminHomeNavBarList,
+            ),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+          );
+        }),
+    GoRoute(
+        path: Routes.basicPreviewEmployee,
+        pageBuilder: (context, state) {
+          final args = state.extra as Map?;
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: BasicPreview(
+              pages: [
+                SizedBox(),
+                SizedBox(),
+                SizedBox(),
+              ],
               bottomNavBarIconsList:
-                  args['bottomNavList'] as List<BottomNavBarModel>,
+                  args?[AppStrings.bottomNavList] as List<BottomNavBarModel>,
             ),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
@@ -128,3 +158,23 @@ final GoRouter router = GoRouter(
         }),
   ],
 );
+
+String getInitalRoute() {
+  bool isKeyExist = AppSharedPreferences.sharedPreferences
+      .containsKey(AppStrings.userModelKey);
+  if (isKeyExist) {
+    String? role = jsonDecode(AppSharedPreferences.sharedPreferences
+            .getString(AppStrings.userModelKey) ??
+        "")['role'];
+    UserRoleEnum roleEnum =
+        UserRoleEnum.values.firstWhere((model) => model.name == role);
+    switch (roleEnum) {
+      case UserRoleEnum.admin:
+        return Routes.basicPreviewAdmin;
+
+      case UserRoleEnum.employee:
+        return Routes.basicPreviewEmployee;
+    }
+  }
+  return Routes.getStartedPage;
+}
