@@ -1,21 +1,119 @@
 {
-  "splash":{
+  "get_started":{
+    "get_started":"أبدأ",
+    "subtitle":"معا نستطيع صناعة نجاح كبير",
+    "title": "Workify"
 
   },
   "role_select": {
-
+    "manager": "مدير",
+    "emp": "موظف",
+    "choose_role": "اختر دورك",
+    "next": "التالى"
   },
   "login": {
-
+    "title": "نحن نسهل عليك ادارة شركتك",
+    "login": "تسجيل دخول",
+    "email": "البريد الالكترونى",
+    "password": "كلمة المرور",
+    "log_in": "سجل دخول",
+    "need_account": "تحتاج حساب؟",
+    "sign_up": "انشئ حساب"
+  },
+  "admin_signup": {
+    "sign_up": "انشاء حساب",
+    "email": "Email","first_name": "الاسم الاول",
+    "last_name": "الاسم الاخير",
+    "password": "كلمة المرور",
+    "confirm_password": "تأكيد كلمة المرور",
+    "have_account": "لديك حساب؟",
+    "log_in": "تسجيل دخول"
   },
   "admin_home": {
-
+    "hello": "مرحباً",
+    "total": "اجمالى الموظفين",
+    "on_time": "على الوقت",
+    "delayed":"متاخر",
+    "absent": "غياب",
+    "day_movements": "تحركات اليوم",
+    "see_all":"رؤية الكل",
+    "emp_name": "اسم الموظف",
+    "check_in": "حضور",
+    "check_out": "انصراف"
   },
-  "emp_home": {
+  "emp_list": {
+    "employees": "الموظفين",
+    "name": "الاسم",
+    "role": "الدور",
+    "level": "المستوى",
+    "actions": "الإجراءات",
+    "senior": "كبير",
+    "junior": "صغير",
+    "mid": "متوسط",
+    "search": "بحث",
+    "add": "اضافة جديد",
+    "edit": "تعديل",
+    "delete": "حذف"
+  },
+  "add_emp": {
+    "account": "الحساب",
+    "username": "اسم المستخدم",
+    "password": "كلمة المرور",
+    "personal_info": "البيانات الشخصية",
+    "first_name": "الاسم الاول",
+    "last_name": "الاسم الاخير",
+    "email": "البريد الالكترونى",
+    "phone": "الهاتف",
+    "address": "العنوان",
+    "job_info": "بيانات الوظيفة",
+    "job_title": "اسم الوظيفة",
+    "salary": "الراتب",
+    "level": "المستوى",
+    "num_of_holidays": "عدد العطلات",
+    "save": "حفظ"
+  },
+  "company_empty": {
+    "company": "الشركة",
+    "your_company": "شركتك لم تُعَد بعد،",
+    "please_add": "من فضلك اضف السمات",
+    "features": "المطلوبة",
+    "add_setup": "إضافة إعداد"
+  },
+  "company_add": {
+    "company": "الشركة",
+    "company_name": "اسم الشركة",
+    "company_logo": "شعار الشركة",
+    "on_site": "في الموقع",
+    "open_map": "فتح الخريطة",
+    "start_time": "وقت الحضور",
+    "end_time": "وقت الانصراف",
+    "vacations": "ايام الاجازات",
+    "save": "حفظ"
+  },
+  "settings": {
+    "settings": "الإعدادات",
+    "language": "اللغة",
+    "change_password": "تغيير كلمة المرور",
+    "logout": "تسجيل خروج"
+  },
+  "company_select": {
+    "select_company": "اختر شركتك",
+    "search": "بحث",
+    "next": "التالى"
+  },
 
+  "emp_home": {
+    "hello": "مرحباً",
+    "total": "اجمالي الراتب",
+    "balance": "رصيد الاجازات",
+    "movements": "التحركات",
+    "emp_name": "اسم الموظف",
+    "check_in": "حضور",
+    "check_out": "انصراف"
   },
   "fingerprint": {
-
+    "check_in": "حضور",
+    "check_out": "انصراف"
   }
 
 }
