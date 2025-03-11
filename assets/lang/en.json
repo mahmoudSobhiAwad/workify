@@ -1,0 +1,119 @@
+{
+  "get_started":{
+    "get_started":"Get Started",
+    "subtitle":"Together we can make a huge success",
+    "title": "Workify"
+
+  },
+  "role_select": {
+    "manager": "Manager",
+    "emp": "Employee",
+    "choose_role": "Select Your Role",
+    "next": "Next"
+  },
+  "login": {
+    "title": "We make it Easy For You To manage your company",
+    "login": "Login",
+    "email": "Email",
+    "password": "Password",
+    "log_in": "Log In",
+    "need_account": "Need Account?",
+    "sign_up": "Sign Up"
+  },
+  "admin_signup": {
+    "sign_up": "Sign Up",
+    "email": "Email","first_name": "First Name",
+    "last_name": "Last Name",
+    "password": "Password",
+    "confirm_password": "Confirm Password",
+    "have_account": "Have Account?",
+    "log_in": "Login"
+  },
+  "admin_home": {
+    "hello": "Hello",
+    "total": "Total Employees",
+    "on_time": "On Time",
+    "delayed":"Delayed",
+    "absent": "absent",
+    "day_movements": "Day Movements",
+    "see_all":"See All",
+    "emp_name": "Employee Name",
+    "check_in": "Check In",
+    "check_out": "Check Out"
+  },
+  "emp_list": {
+    "employees": "Employees",
+    "name": "Name",
+    "role": "Role",
+    "level": "Level",
+    "actions": "Actions",
+    "senior": "Senior",
+    "junior": "Junior",
+    "mid": "Mid Level",
+    "search": "Search",
+    "add": "Add New",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "add_emp": {
+    "account": "Account",
+    "username": "Username",
+    "password": "Password",
+    "personal_info": "Personal Info",
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "job_info": "Job Info",
+    "job_title": "Job Title",
+    "salary": "Salary",
+    "level": "Level",
+    "num_of_holidays": "Number Of Holidays",
+    "save": "Save"
+  },
+  "company_empty": {
+    "company": "Company",
+    "your_company": "Your Company Hasn't Been Set Yet,",
+    "please_add": "Please Add The Required",
+    "features": "Features",
+    "add_setup": "Add Setup"
+  },
+  "company_add": {
+    "company": "Company",
+    "company_name": "Company Name",
+    "company_logo": "Company Logo",
+    "on_site": "On Site",
+    "open_map": "Open Map",
+    "start_time": "Start Time",
+    "end_time": "Leave Time",
+    "vacations": "Vacation Days",
+    "save": "Save"
+  },
+  "settings": {
+    "settings": "Settings",
+    "language": "Language",
+    "change_password": "Change Password",
+    "logout": "Logout"
+  },
+  "company_select": {
+    "select_company": "Select Your Company",
+    "search": "Search",
+    "next": "Next"
+  },
+
+  "emp_home": {
+    "hello": "Hello",
+    "total": "Total Salary",
+    "balance": "Leave Balance",
+    "movements": "Movements",
+    "emp_name": "Employee Name",
+    "check_in": "Check In",
+    "check_out": "Check Out"
+  },
+  "fingerprint": {
+    "check_in": "Check In",
+    "check_out": "Check Out"
+  }
+
+}
