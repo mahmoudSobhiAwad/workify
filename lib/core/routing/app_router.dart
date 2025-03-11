@@ -112,10 +112,12 @@ final GoRouter router = GoRouter(
     GoRoute(
         path: Routes.companySetupPage,
         pageBuilder: (context, state) {
+          final args = state.extra as Map<String, dynamic>;
           return CustomTransitionPage(
             key: state.pageKey,
             child: CompanySetupView(
-              companyId: state.extra as String,
+              companyId: args['id'],
+              companyModel: args['model'],
             ),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {

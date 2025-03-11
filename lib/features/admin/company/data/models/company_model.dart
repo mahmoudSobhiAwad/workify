@@ -23,6 +23,9 @@ class CompanyModel {
 
     return CompanyModel(
         companyId: json['id'],
+        latLng: json['location'] != null
+            ? LatLng(json['location']['lat'], json['location']['long'])
+            : null,
         companyLogo: json['companyLogo'],
         companyName: json['name'],
         startTime: (json['startTime']),
