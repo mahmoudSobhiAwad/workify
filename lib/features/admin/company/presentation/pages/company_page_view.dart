@@ -6,7 +6,7 @@ import 'package:workify/core/routing/routes.dart';
 import 'package:workify/core/utils/theme/app_colors.dart';
 import 'package:workify/core/utils/theme/app_font_stlyles.dart';
 import 'package:workify/core/utils/theme/app_images.dart';
-import 'package:workify/features/admin/company/presentation/cubit/cubit/company_cubit.dart';
+import 'package:workify/features/admin/company/presentation/cubit/company_cubit/company_cubit.dart';
 import 'package:workify/shared/features/on_boarding/presentation/widgets/custom_push_button.dart';
 
 class CompanyPageView extends StatelessWidget {
@@ -28,7 +28,9 @@ class CompanyPageView extends StatelessWidget {
         } else if (state is SuccessLoadCompanyState) {
           return state.companyModel != null
               ? SizedBox()
-              : ComapnyEmptyStateView();
+              : ComapnyEmptyStateView(
+                  companyId: context.read<CompanyCubit>().id,
+                );
         }
         return SizedBox();
       }),
@@ -39,8 +41,9 @@ class CompanyPageView extends StatelessWidget {
 class ComapnyEmptyStateView extends StatelessWidget {
   const ComapnyEmptyStateView({
     super.key,
+    required this.companyId,
   });
-
+  final String companyId;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -63,7 +66,7 @@ class ComapnyEmptyStateView extends StatelessWidget {
           ),
           CustomPushButton(
             onTap: () {
-              context.push(Routes.companySetupPage);
+              context.push(Routes.companySetupPage, extra: companyId);
             },
             backgroundColor: AppColors.green53,
             child: Center(
