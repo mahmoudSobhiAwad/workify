@@ -33,12 +33,12 @@ class FingerPrint extends StatelessWidget {
             ),
             SizedBox(height: 16),
             Text(
-              'John Doe',
+              'Mahmoud Sobhi',
               style: AppFontStyle.bold19,
             ),
             SizedBox(height: 40),
             Container(
-              height: 200,
+              height: 163,
               margin: EdgeInsets.symmetric(horizontal: 16),
               width: double.infinity,
               decoration: BoxDecoration(
@@ -69,9 +69,9 @@ class FingerPrint extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 20),
             Container(
-              height: 200,
+              height: 163,
               margin: EdgeInsets.symmetric(horizontal: 16),
               width: double.infinity,
               decoration: BoxDecoration(

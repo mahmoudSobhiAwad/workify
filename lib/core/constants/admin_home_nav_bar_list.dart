@@ -15,3 +15,15 @@ final List<BottomNavBarModel> adminHomeNavBarList = [
       activeItemPath: AppIcons.assetsIconsSelectedSetting,
       nonActiveItemPath: AppIcons.assetsIconsSettingNotSelected),
 ];
+
+final List<BottomNavBarModel> employeeHomeNavBarList = [
+  BottomNavBarModel(
+      activeItemPath: AppIcons.assetsIconsFingerPrintSelected,
+      nonActiveItemPath: AppIcons.assetsIconsFingerPrintNotSelected),
+  BottomNavBarModel(
+      activeItemPath: AppIcons.assetsIconsHomeSelected,
+      nonActiveItemPath: AppIcons.assetsIconsHomeNotSelected),
+  BottomNavBarModel(
+      activeItemPath: AppIcons.assetsIconsSelectedSetting,
+      nonActiveItemPath: AppIcons.assetsIconsSettingNotSelected),
+];

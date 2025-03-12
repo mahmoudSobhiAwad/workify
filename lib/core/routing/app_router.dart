@@ -14,10 +14,11 @@ import 'package:workify/features/admin/company/presentation/pages/company_setup_
 import 'package:workify/features/admin/company/presentation/pages/goolge_map_view.dart';
 import 'package:workify/features/admin/users/presentation/cubit/employee_cubit.dart';
 import 'package:workify/features/admin/users/presentation/pages/update_user_view.dart';
-import 'package:workify/shared/features/basic_preview/data/models/bottom_nav_bar_model.dart';
 import 'package:workify/shared/features/basic_preview/presentation/pages/basic_preview.dart';
 import 'package:workify/shared/features/on_boarding/presentation/pages/get_started_page.dart';
 import 'package:workify/shared/features/on_boarding/presentation/pages/role_select_page.dart';
+
+import '../../features/employee/login/presentation/employee_login_page.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: getInitalRoute(),
@@ -77,13 +78,9 @@ final GoRouter router = GoRouter(
           return CustomTransitionPage(
             key: state.pageKey,
             child: BasicPreview(
-              pages: [
-                SizedBox(),
-                SizedBox(),
-                SizedBox(),
-              ],
-              bottomNavBarIconsList:
-                  args?[AppStrings.bottomNavList] as List<BottomNavBarModel>,
+              initialIndex: args?[AppStrings.initalIndex] ?? 0,
+              pages: employeeHomePages,
+              bottomNavBarIconsList: employeeHomeNavBarList,
             ),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
@@ -170,6 +167,22 @@ final GoRouter router = GoRouter(
           return CustomTransitionPage(
             key: state.pageKey,
             child: AdminSignupPage(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+          );
+        }),
+    GoRoute(
+        path: Routes.employeeLogin,
+        pageBuilder: (context, state) {
+          // final args = state.extra as Map;
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: EmployeeLoginPage(),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
               return FadeTransition(

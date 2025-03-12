@@ -84,17 +84,8 @@ class _RoleSelectPageState extends State<RoleSelectPage> {
               onTap: () {
                 if (_selectedRole == 0) {
                   context.push(Routes.adminLogin);
-                  /*context.go(Routes.basicPreview, extra: {
-                    "pages": [
-                      AdminHomePage(),
-                      UserPageView(),
-                      CompanyPageView(),
-                      SettingView(),
-                    ],
-                   
-                  });*/
                 } else {
-                  //TODO edit to go to employee
+                  context.push(Routes.employeeLogin);
                 }
               },
               margin: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
