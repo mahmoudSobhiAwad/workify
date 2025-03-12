@@ -35,3 +35,15 @@ final class FailureUpdateEmployeeStates extends UpdateEmployeeStates {
 
   FailureUpdateEmployeeStates({required this.errMessage});
 }
+
+final class DeleteEmployeeStates extends EmployeeState {}
+
+final class LoadingDeleteEmployeeStates extends DeleteEmployeeStates {}
+
+final class SuccessDeleteEmployeeStates extends DeleteEmployeeStates {}
+
+final class FailureDeleteEmployeeStates extends DeleteEmployeeStates {
+  final String errMessage;
+
+  FailureDeleteEmployeeStates({required this.errMessage});
+}

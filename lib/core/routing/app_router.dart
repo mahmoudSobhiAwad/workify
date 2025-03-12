@@ -12,6 +12,7 @@ import 'package:workify/features/admin/auth/presentation/pages/admin_login_view.
 import 'package:workify/features/admin/auth/presentation/pages/admin_sign_up_view.dart';
 import 'package:workify/features/admin/company/presentation/pages/company_setup_view.dart';
 import 'package:workify/features/admin/company/presentation/pages/goolge_map_view.dart';
+import 'package:workify/features/admin/users/data/models/notification_model.dart';
 import 'package:workify/features/admin/users/presentation/cubit/employee_cubit.dart';
 import 'package:workify/features/admin/users/presentation/pages/update_user_view.dart';
 import 'package:workify/shared/features/basic_preview/data/models/bottom_nav_bar_model.dart';
@@ -102,6 +103,7 @@ final GoRouter router = GoRouter(
             key: state.pageKey,
             child: UpdateUserView(
               cubit: args['cubit'] as EmployeeCubit,
+              model: args['model'] as EmployeeModel,
             ),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {

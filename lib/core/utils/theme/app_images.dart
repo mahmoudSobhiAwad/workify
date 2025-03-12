@@ -30,5 +30,6 @@ class AppImages {
   /// assets/images/splash_image.svg
   static const String assetsImagesSplashImage = "assets/images/splash_image.svg";
   static const String workFromHome = "assets/images/home_work.svg";
+  static const String errorImages = "assets/images/error_image.svg";
 }
 
