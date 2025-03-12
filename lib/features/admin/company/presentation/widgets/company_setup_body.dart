@@ -10,16 +10,18 @@ import 'package:workify/core/constants/enums.dart';
 import 'package:workify/core/routing/routes.dart';
 import 'package:workify/core/utils/theme/app_colors.dart';
 import 'package:workify/core/utils/theme/app_font_stlyles.dart';
-import 'package:workify/core/utils/theme/app_icons.dart';
 import 'package:workify/core/utils/theme/app_images.dart';
 import 'package:workify/features/admin/company/data/models/company_model.dart';
 import 'package:workify/features/admin/company/presentation/cubit/company_setup_cubit/company_setup_cubit.dart';
-import 'package:workify/shared/features/on_boarding/presentation/widgets/custom_push_button.dart';
-import 'package:workify/shared/functions/custom_toaster.dart';
+import 'package:workify/features/admin/company/presentation/widgets/start_end_time.dart';
+import 'package:workify/features/admin/company/presentation/widgets/update_button.dart';
+import 'package:workify/shared/functions/image_of_map.dart';
 import 'package:workify/shared/models/image_model.dart';
+import 'package:workify/shared/widgets/custom_cached_image.dart';
 import 'package:workify/shared/widgets/custom_text_form_field.dart';
 import 'package:workify/shared/widgets/edit_image_dialog.dart';
 import 'package:workify/shared/widgets/image_picker_dialog.dart';
+
 class CompanySetupBody extends StatefulWidget {
   const CompanySetupBody({
     super.key,
@@ -43,9 +45,18 @@ class _CompanySetupBodyState extends State<CompanySetupBody> {
   ImageTypeModel? imageTypeModel;
   @override
   void initState() {
-    companyName = TextEditingController();
-    endTime = TextEditingController();
-    startTime = TextEditingController();
+    companyName = TextEditingController(text: widget.companyModel?.companyName);
+    endTime = TextEditingController(text: widget.companyModel?.endTime);
+    startTime = TextEditingController(text: widget.companyModel?.startTime);
+    location = widget.companyModel?.latLng;
+    imageMapPath = location != null ? getImageOfMap(location!) : null;
+    isCompanyOnSite = location != null;
+    imageTypeModel = widget.companyModel?.companyLogo != null
+        ? ImageTypeModel(
+            imagePath: widget.companyModel!.companyLogo!,
+            imageTypeEnum: ImageTypeEnum.network)
+        : null;
+    holidayList.addAll(widget.companyModel?.holidayList ?? []);
     super.initState();
   }
 
@@ -117,14 +128,21 @@ class _CompanySetupBodyState extends State<CompanySetupBody> {
                                     ? ClipRRect(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(50)),
-                                        child: Image.file(
-                                          width: 100,
-                                          height: 100,
-                                          File(
-                                            imageTypeModel!.imagePath,
-                                          ),
-                                          fit: BoxFit.cover,
-                                        ),
+                                        child: imageTypeModel!.imageTypeEnum ==
+                                                ImageTypeEnum.network
+                                            ? CustomCachedImage(
+                                                width: 100,
+                                                hight: 100,
+                                                imagePath:
+                                                    imageTypeModel!.imagePath)
+                                            : Image.file(
+                                                width: 100,
+                                                height: 100,
+                                                File(
+                                                  imageTypeModel!.imagePath,
+                                                ),
+                                                fit: BoxFit.cover,
+                                              ),
                                       )
                                     : null,
                               ),
@@ -195,7 +213,9 @@ class _CompanySetupBodyState extends State<CompanySetupBody> {
                         if (isCompanyOnSite)
                           InkWell(
                             onTap: () async {
-                              await context.push(Routes.mapView).then((value) {
+                              await context
+                                  .push(Routes.mapView, extra: location)
+                                  .then((value) {
                                 if (value != null &&
                                     value is LatLng &&
                                     context.mounted) {
@@ -246,67 +266,7 @@ class _CompanySetupBodyState extends State<CompanySetupBody> {
                     );
                   },
                 ),
-                Row(
-                  spacing: 24,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: CustomTextFormField(
-                        controller: startTime,
-                        maxLine: 1,
-                        isReadOnly: true,
-                        onTap: () async {
-                          showTimePicker(
-                                  context: context,
-                                  initialTime: TimeOfDay(hour: 8, minute: 0))
-                              .then((value) {
-                            if (value != null && context.mounted) {
-                              startTime.text = value.format(context);
-                            }
-                          });
-                        },
-                        validator: (value) {
-                          if (value == null || value.trim().isEmpty) {
-                            return "Please Specify Start Time";
-                          }
-                          return null;
-                        },
-                        hintText: "Start Time",
-                        suffixWidget: SvgPicture.asset(
-                          AppIcons.assetsIconsStartTimeIcon,
-                          fit: BoxFit.scaleDown,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: CustomTextFormField(
-                        controller: endTime,
-                        onTap: () {
-                          showTimePicker(
-                                  context: context,
-                                  initialTime: TimeOfDay(hour: 16, minute: 0))
-                              .then((value) {
-                            if (value != null && context.mounted) {
-                              endTime.text = value.format(context);
-                            }
-                          });
-                        },
-                        isReadOnly: true,
-                        hintText: "End Time",
-                        validator: (value) {
-                          if (value == null || value.trim().isEmpty) {
-                            return "Please Specify End Time";
-                          }
-                          return null;
-                        },
-                        suffixWidget: SvgPicture.asset(
-                          AppIcons.assetsIconsEndTimeIcon,
-                          fit: BoxFit.scaleDown,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                StartAndEndTimesPicker(startTime: startTime, endTime: endTime),
                 ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   child: ColoredBox(
@@ -317,26 +277,29 @@ class _CompanySetupBodyState extends State<CompanySetupBody> {
                       },
                       builder: (context, state) {
                         return TableCalendar(
-                            onDaySelected: (selectedDay, focusedDay) {
-                              if (holidayList.contains(selectedDay)) {
-                                holidayList.remove(selectedDay);
-                              } else {
-                                holidayList.add(selectedDay);
-                              }
-                              context
-                                  .read<CompanySetupCubit>()
-                                  .changeSelectedDay();
-                            },
-                            selectedDayPredicate: (day) =>
-                                holidayList.contains(day),
-                            availableCalendarFormats: const {
-                              CalendarFormat.month: 'Month'
-                            },
-                            calendarFormat: CalendarFormat.month,
-                            focusedDay: DateTime.now(),
-                            firstDay: DateTime.now(),
-                            lastDay: DateTime.now().copyWith(
-                                month: DateTime.now().month + 1, day: 0));
+                          selectedDayPredicate: (day) {
+                            // Normalize the day to UTC and set time to 00:00:00.000
+                            final normalizedDay =
+                                DateTime.utc(day.year, day.month, day.day);
+
+                            return holidayList.any((selectedDay) =>
+                                selectedDay.year == normalizedDay.year &&
+                                selectedDay.month == normalizedDay.month &&
+                                selectedDay.day == normalizedDay.day);
+                          },
+                          onDaySelected: (selectedDay, focusedDay) {
+                            // Add or remove the selected date
+                            addOrRemoveDate(selectedDay);
+                          },
+                          availableCalendarFormats: const {
+                            CalendarFormat.month: 'Month'
+                          },
+                          calendarFormat: CalendarFormat.month,
+                          focusedDay: DateTime.now(),
+                          firstDay: DateTime.now(),
+                          lastDay: DateTime.now().copyWith(
+                              month: DateTime.now().month + 1, day: 0),
+                        );
                       },
                     ),
                   ),
@@ -345,49 +308,41 @@ class _CompanySetupBodyState extends State<CompanySetupBody> {
             ),
           ),
         )),
-        BlocBuilder<CompanySetupCubit, CompanySetupState>(
-          buildWhen: (prev, curr) {
-            return curr is UpdateCompanyStates;
-          },
-          builder: (context, state) {
-            return CustomPushButton(
-              isLoading: state is LoadingUpdateCompanyStates,
-              onTap: () {
-                if (isCompanyOnSite) {
-                  if (formKey.currentState!.validate()) {
-                    if (location != null) {
-                      context.read<CompanySetupCubit>().createCompany(
-                          CompanyModel(
-                              latLng: location,
-                              companyLogo: imageTypeModel?.imagePath,
-                              companyName: companyName.text,
-                              companyId:
-                                  context.read<CompanySetupCubit>().companyId,
-                              startTime: startTime.text,
-                              endTime: endTime.text,
-                              holidayList: holidayList));
-                    } else {
-                      CustomToast(
-                              context: context, header: "Location is Missing")
-                          .showBottomToast();
-                    }
-                  }
-                } else {
-                  if (formKey.currentState!.validate()) {}
-                }
-              },
-              backgroundColor: AppColors.green53,
-              margin: EdgeInsets.all(16),
-              child: Center(
-                child: Text(
-                  "Save",
-                  style: AppFontStyle.semiBold16,
-                ),
-              ),
-            );
-          },
-        ),
+        CustomUpdateButton(
+            isCompanyOnSite: isCompanyOnSite,
+            formKey: formKey,
+            location: location,
+            imageTypeModel: imageTypeModel,
+            companyName: companyName,
+            startTime: startTime,
+            endTime: endTime,
+            holidayList: holidayList,
+            isEdit: widget.companyModel != null),
       ],
     ));
+  }
+
+  void addOrRemoveDate(DateTime date) {
+    // Normalize the date to UTC and set time to 00:00:00.000
+    final normalizedDate = DateTime.utc(date.year, date.month, date.day);
+
+    final isSelected = holidayList.any((day) =>
+        day.year == normalizedDate.year &&
+        day.month == normalizedDate.month &&
+        day.day == normalizedDate.day);
+
+    if (isSelected) {
+      // Remove the date if it's already selected
+      holidayList.removeWhere((day) =>
+          day.year == normalizedDate.year &&
+          day.month == normalizedDate.month &&
+          day.day == normalizedDate.day);
+    } else {
+      // Add the date if it's not selected
+      holidayList.add(normalizedDate);
+    }
+
+    // Trigger a rebuild of the TableCalendar
+    context.read<CompanySetupCubit>().changeSelectedDay();
   }
 }

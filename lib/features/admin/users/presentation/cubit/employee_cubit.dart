@@ -71,4 +71,35 @@ class EmployeeCubit extends Cubit<EmployeeState> {
       return null;
     }
   }
+
+  Future<void> deleteEmployee(String userName) async {
+    try {
+      emit(LoadingDeleteEmployeeStates());
+      await _firestore
+          .collection("companies")
+          .doc(id)
+          .collection("employees")
+          .doc(userName)
+          .delete();
+      emit(SuccessDeleteEmployeeStates());
+    } catch (e) {
+      emit(FailureDeleteEmployeeStates(errMessage: e.toString()));
+    }
+  }
+
+  Future<void> updateUser(EmployeeModel model) async {
+    emit(LoadingUpdateEmployeeStates());
+
+    try {
+      await _firestore
+          .collection("companies")
+          .doc(id)
+          .collection("employees")
+          .doc(model.userName)
+          .update(model.toJson());
+      emit(SuccessUpdateEmployeeStates());
+    } catch (e) {
+      emit(FailureUpdateEmployeeStates(errMessage: e.toString()));
+    }
+  }
 }

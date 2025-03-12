@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:workify/core/routing/routes.dart';
 import 'package:workify/core/utils/theme/app_colors.dart';
 import 'package:workify/core/utils/theme/app_font_stlyles.dart';
 import 'package:workify/core/utils/theme/app_icons.dart';
 import 'package:workify/features/admin/users/data/models/notification_model.dart';
+import 'package:workify/features/admin/users/presentation/cubit/employee_cubit.dart';
+import 'package:workify/shared/functions/custom_toaster.dart';
 import 'package:workify/shared/widgets/custom_two_option_dialog.dart';
 import 'package:workify/shared/widgets/dialog_helper_option.dart';
 
@@ -23,8 +28,12 @@ class CustomUserItem extends StatelessWidget {
       ),
       child: ListTile(
         leading: CircleAvatar(
-          backgroundColor: AppColors.purblePrimary,
+          backgroundColor: AppColors.grayE0,
           radius: 40,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SvgPicture.asset(AppIcons.assetsIconsProfileIcon),
+          ),
         ),
         title: Text(
           "${employeeModel.firstName} ${employeeModel.lastName} ",
@@ -64,15 +73,54 @@ class CustomUserItem extends StatelessWidget {
             InkWell(
                 onTapDown: (details) {
                   DialogHelper.showCustomDialog(
-                      firstOptionFunction: () {},
+                      firstOptionFunction: () {
+                        context.push(Routes.updateUser, extra: {
+                          "cubit": context.read<EmployeeCubit>(),
+                          "model": employeeModel,
+                        });
+                      },
                       secondOptionFunction: () {
                         showDialog(
                             context: context,
-                            builder: (context) => CustomTwoOptionDialog(
-                                backGroundColor: AppColors.red35,
-                                title: "Are You Sure To Delete This Employee",
-                                buttonTitle: "Delete",
-                                onTap: () {}));
+                            builder: (childContext) =>
+                                BlocConsumer<EmployeeCubit, EmployeeState>(
+                                  bloc: context.read<EmployeeCubit>(),
+                                  builder: (blocContext, state) {
+                                    return CustomTwoOptionDialog(
+                                        isLoading: state
+                                            is LoadingDeleteEmployeeStates,
+                                        backGroundColor: AppColors.red35,
+                                        title:
+                                            "Are You Sure To Delete This Employee",
+                                        buttonTitle: "Delete",
+                                        onTap: () {
+                                          context
+                                              .read<EmployeeCubit>()
+                                              .deleteEmployee(
+                                                  employeeModel.userName);
+                                        });
+                                  },
+                                  listener: (listenerContext, state) {
+                                    if (state is SuccessDeleteEmployeeStates) {
+                                      context.pop(true);
+                                    } else if (state
+                                        is FailureDeleteEmployeeStates) {
+                                      CustomToast(
+                                              context: context,
+                                              header: state.errMessage)
+                                          .showBottomToast();
+                                      if (context.mounted) {
+                                        context.pop();
+                                      }
+                                    }
+                                  },
+                                )).then((value) {
+                          if (value != null &&
+                              value == true &&
+                              context.mounted) {
+                            context.read<EmployeeCubit>().getAllUsers();
+                          }
+                        });
                       },
                       firstOptionTitle: 'Edit',
                       secondOptionTitle: "Delete",

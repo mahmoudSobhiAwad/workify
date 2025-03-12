@@ -16,8 +16,9 @@ import 'package:workify/shared/widgets/custom_app_bar.dart';
 import 'package:workify/shared/widgets/custom_text_form_field.dart';
 
 class UpdateUserView extends StatelessWidget {
-  const UpdateUserView({super.key, required this.cubit});
+  const UpdateUserView({super.key, required this.cubit, this.model});
   final EmployeeCubit cubit;
+  final EmployeeModel? model;
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
@@ -26,7 +27,10 @@ class UpdateUserView extends StatelessWidget {
         appBar: CustomAppBar(
           title: "Create User",
         ),
-        body: SafeArea(child: UpdateUserBody()),
+        body: SafeArea(
+            child: UpdateUserBody(
+          model: model,
+        )),
       ),
     );
   }
@@ -35,7 +39,9 @@ class UpdateUserView extends StatelessWidget {
 class UpdateUserBody extends StatefulWidget {
   const UpdateUserBody({
     super.key,
+    this.model,
   });
+  final EmployeeModel? model;
 
   @override
   State<UpdateUserBody> createState() => _UpdateUserBodyState();
@@ -57,17 +63,19 @@ class _UpdateUserBodyState extends State<UpdateUserBody> {
 
   @override
   void initState() {
-    userNameController = TextEditingController();
-    passwordController = TextEditingController();
-    firstNameController = TextEditingController();
-    lastNameController = TextEditingController();
-    addressController = TextEditingController();
-    emailController = TextEditingController();
-    phoneController = TextEditingController();
-    jobLevelController = TextEditingController();
-    jobTitleController = TextEditingController();
-    numOfHolidayController = TextEditingController();
-    salaryController = TextEditingController();
+    userNameController = TextEditingController(text: widget.model?.userName);
+    passwordController = TextEditingController(text: widget.model?.password);
+    firstNameController = TextEditingController(text: widget.model?.firstName);
+    lastNameController = TextEditingController(text: widget.model?.lastName);
+    addressController = TextEditingController(text: widget.model?.address);
+    emailController = TextEditingController(text: widget.model?.email);
+    phoneController = TextEditingController(text: widget.model?.phone);
+    jobLevelController = TextEditingController(text: widget.model?.jobLevel);
+    jobTitleController = TextEditingController(text: widget.model?.jobTitle);
+    numOfHolidayController =
+        TextEditingController(text: widget.model?.numOfHolidays.toString());
+    salaryController =
+        TextEditingController(text: widget.model?.salary.toString());
     super.initState();
   }
 
@@ -106,6 +114,17 @@ class _UpdateUserBodyState extends State<UpdateUserBody> {
                   ),
                   CustomTextFormField(
                     controller: userNameController,
+                    isReadOnly: widget.model != null,
+                    onTap: () {
+                      if (widget.model != null) {
+                        CustomToast(
+                                context: context,
+                                type: ToastificationType.warning,
+                                header:
+                                    "This is unique value chaning it will change the user")
+                            .showBottomToast();
+                      }
+                    },
                     hintText: "User Name",
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -272,7 +291,7 @@ class _UpdateUserBodyState extends State<UpdateUserBody> {
                 isLoading: state is LoadingUpdateEmployeeStates,
                 onTap: () {
                   if (formKey.currentState!.validate()) {
-                    context.read<EmployeeCubit>().createNewUser(EmployeeModel(
+                    final EmployeeModel model = EmployeeModel(
                         userName: userNameController.text,
                         password: passwordController.text,
                         firstName: firstNameController.text,
@@ -284,7 +303,12 @@ class _UpdateUserBodyState extends State<UpdateUserBody> {
                         jobLevel: jobLevelController.text,
                         numOfHolidays:
                             int.tryParse(numOfHolidayController.text),
-                        salary: double.parse(salaryController.text)));
+                        salary: double.parse(salaryController.text));
+                    if (widget.model != null) {
+                      context.read<EmployeeCubit>().updateUser(model);
+                    } else {
+                      context.read<EmployeeCubit>().createNewUser(model);
+                    }
                   }
                 },
                 margin: EdgeInsets.all(16),

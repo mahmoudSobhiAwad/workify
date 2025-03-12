@@ -14,6 +14,7 @@ class CompanySetupCubit extends Cubit<CompanySetupState> {
   CompanySetupCubit({required this.companyId}) : super(CompanySetupInitial());
   final String companyId;
   final ImagePicker picker = ImagePicker();
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   Future<void> pickImage(ImageSource source) async {
     picker.pickImage(source: source).then((value) {
       if (value != null) {
@@ -24,15 +25,45 @@ class CompanySetupCubit extends Cubit<CompanySetupState> {
     });
   }
 
+  Future<void> updateCompnay(
+      {required CompanyModel model,
+      required ImageTypeEnum? imageTypeEnum}) async {
+    emit(LoadingUpdateCompanyStates());
+    if (imageTypeEnum == ImageTypeEnum.file) {
+      final result = await uploadImage(model.companyLogo!);
+      if (result != null) {
+        model.companyLogo = result;
+        await updateCompanyWithoutImage(model);
+      } else {
+        emit(FailureUpdateCompanyStates(errMessage: "Error in Upload Image"));
+      }
+    } else {
+      await updateCompanyWithoutImage(model);
+    }
+  }
+
+  Future<void> updateCompanyWithoutImage(CompanyModel model) async {
+    try {
+      await _firestore
+          .collection("companies")
+          .doc(companyId)
+          .collection("info")
+          .doc("companyInfo")
+          .update(model.toMap());
+      emit(SuccessUpdateCompanyStates());
+    } catch (e) {
+      emit(FailureUpdateCompanyStates(errMessage: e.toString()));
+    }
+  }
+
   Future<void> createCompany(CompanyModel companyModel) async {
     emit(LoadingUpdateCompanyStates());
     if (companyModel.companyLogo != null) {
       final result = await uploadImage(companyModel.companyLogo!);
       if (result != null) {
         companyModel.companyLogo = result;
-        final FirebaseFirestore firestore = FirebaseFirestore.instance;
         try {
-          await firestore
+          await _firestore
               .collection("companies")
               .doc(companyId)
               .collection("info")
