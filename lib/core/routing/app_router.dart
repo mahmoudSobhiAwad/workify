@@ -1,18 +1,27 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:workify/core/constants/admin_home_nav_bar_list.dart';
+import 'package:workify/core/constants/admin_home_pages.dart';
 import 'package:workify/core/routing/routes.dart';
-import 'package:workify/features/employee/basic_screen.dart';
-import 'package:workify/features/employee/finger_print/presentation/pages/finger_print_page.dart';
-import 'package:workify/features/employee/home/presentation/pages/home_page.dart';
+import 'package:workify/core/storage/cache_helper.dart';
+import 'package:workify/core/utils/constants/app_strings.dart';
+import 'package:workify/core/utils/constants/enums.dart';
+import 'package:workify/features/admin/auth/presentation/pages/admin_login_view.dart';
+import 'package:workify/features/admin/auth/presentation/pages/admin_sign_up_view.dart';
+import 'package:workify/features/admin/company/presentation/pages/company_setup_view.dart';
+import 'package:workify/features/admin/company/presentation/pages/goolge_map_view.dart';
+import 'package:workify/features/admin/users/presentation/cubit/employee_cubit.dart';
+import 'package:workify/features/admin/users/presentation/pages/update_user_view.dart';
+import 'package:workify/shared/features/basic_preview/data/models/bottom_nav_bar_model.dart';
+import 'package:workify/shared/features/basic_preview/presentation/pages/basic_preview.dart';
 import 'package:workify/shared/features/on_boarding/presentation/pages/get_started_page.dart';
 import 'package:workify/shared/features/on_boarding/presentation/pages/role_select_page.dart';
-import 'package:workify/shared/features/settings/presentation/pages/settings_page.dart';
-import 'package:workify/shared/models/bottom_nav_model.dart';
 
 final GoRouter router = GoRouter(
-  // initialLocation: AppSharedPreferences.sharedPreferences
-  //         .containsKey(AppStrings.refreshToken)
-  initialLocation: Routes.getStartedPage,
+  initialLocation: getInitalRoute(),
+  // initialLocation: Routes.getStartedPage,
   // Routes.login,
   routes: [
     GoRoute(
@@ -42,55 +51,125 @@ final GoRouter router = GoRouter(
       ),
     ),
     GoRoute(
-      path: Routes.fingerPrintPage,
-      pageBuilder: (context, state) => CustomTransitionPage(
-        key: state.pageKey,
-        child: const FingerPrint(),
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          return FadeTransition(
-            opacity: animation,
-            child: child,
+        path: Routes.basicPreviewAdmin,
+        pageBuilder: (context, state) {
+          final args = state.extra as Map?;
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: BasicPreview(
+              initialIndex: args?[AppStrings.initalIndex] ?? 0,
+              pages: adminHomePages,
+              bottomNavBarIconsList: adminHomeNavBarList,
+            ),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
           );
-        },
-      ),
-    ),
+        }),
     GoRoute(
-      path: Routes.homePage,
-      pageBuilder: (context, state) => CustomTransitionPage(
-        key: state.pageKey,
-        child: const HomePage(),
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          return FadeTransition(
-            opacity: animation,
-            child: child,
+        path: Routes.basicPreviewEmployee,
+        pageBuilder: (context, state) {
+          final args = state.extra as Map?;
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: BasicPreview(
+              pages: [
+                SizedBox(),
+                SizedBox(),
+                SizedBox(),
+              ],
+              bottomNavBarIconsList:
+                  args?[AppStrings.bottomNavList] as List<BottomNavBarModel>,
+            ),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
           );
-        },
-      ),
-    ),
+        }),
     GoRoute(
-      path: Routes.settingsPage,
-      pageBuilder: (context, state) => CustomTransitionPage(
-        key: state.pageKey,
-        child: const SettingPage(),
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          return FadeTransition(
-            opacity: animation,
-            child: child,
-          );
-        },
-      ),
-    ),
-    GoRoute(
-        path: Routes.basicPage,
+        path: Routes.updateUser,
         pageBuilder: (context, state) {
           final args = state.extra as Map;
           return CustomTransitionPage(
             key: state.pageKey,
-            child: BasicScreen(
-              pages: args['pages'] as List<Widget>,
-              bottomNavBarIconsList:
-                  args['bottomNavList'] as List<BottomNavBarModel>,
+            child: UpdateUserView(
+              cubit: args['cubit'] as EmployeeCubit,
             ),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+          );
+        }),
+    GoRoute(
+        path: Routes.companySetupPage,
+        pageBuilder: (context, state) {
+          final args = state.extra as Map<String, dynamic>;
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: CompanySetupView(
+              companyId: args['id'],
+              companyModel: args['model'],
+            ),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+          );
+        }),
+    GoRoute(
+        path: Routes.mapView,
+        pageBuilder: (context, state) {
+          // final args = state.extra as Map;
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: GoogleMapScreen(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+          );
+        }),
+    GoRoute(
+        path: Routes.adminLogin,
+        pageBuilder: (context, state) {
+          // final args = state.extra as Map;
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: AdminLoginPage(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+          );
+        }),
+    GoRoute(
+        path: Routes.adminSignUp,
+        pageBuilder: (context, state) {
+          // final args = state.extra as Map;
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: AdminSignupPage(),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
               return FadeTransition(
@@ -102,3 +181,23 @@ final GoRouter router = GoRouter(
         }),
   ],
 );
+
+String getInitalRoute() {
+  bool isKeyExist = AppSharedPreferences.sharedPreferences
+      .containsKey(AppStrings.userModelKey);
+  if (isKeyExist) {
+    String? role = jsonDecode(AppSharedPreferences.sharedPreferences
+            .getString(AppStrings.userModelKey) ??
+        "")['role'];
+    UserRoleEnum roleEnum =
+        UserRoleEnum.values.firstWhere((model) => model.name == role);
+    switch (roleEnum) {
+      case UserRoleEnum.admin:
+        return Routes.basicPreviewAdmin;
+
+      case UserRoleEnum.employee:
+        return Routes.basicPreviewEmployee;
+    }
+  }
+  return Routes.getStartedPage;
+}

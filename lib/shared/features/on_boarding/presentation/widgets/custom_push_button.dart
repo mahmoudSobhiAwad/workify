@@ -17,6 +17,7 @@ class CustomPushButton extends StatelessWidget {
     this.shadowColor,
     this.surfaceTintColor,
     this.progressColor,
+    this.borderRadius,
   });
 
   final EdgeInsets? margin;
@@ -31,6 +32,7 @@ class CustomPushButton extends StatelessWidget {
   final Color? shadowColor;
   final Color? surfaceTintColor;
   final Color? progressColor;
+  final double?borderRadius;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -41,20 +43,20 @@ class CustomPushButton extends StatelessWidget {
           onPressed: isLoading ? null : onTap,
           style: ElevatedButton.styleFrom(
             elevation: 0,
-            surfaceTintColor: surfaceTintColor ?? AppColors.purblePrimary,
-            overlayColor: overlayColor ?? AppColors.purblePrimary,
+            surfaceTintColor: surfaceTintColor ?? AppColors.scaffoldBackgroundColor,
+            overlayColor: overlayColor ?? AppColors.scaffoldBackgroundColor,
             disabledBackgroundColor: backgroundColor,
-            backgroundColor: backgroundColor ?? AppColors.purblePrimary,
+            backgroundColor: backgroundColor ?? AppColors.scaffoldBackgroundColor,
             padding: padding ??
                 const EdgeInsets.symmetric(
                   vertical: 17,
                 ),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(borderRadius?? 12),
               side: border ?? BorderSide.none,
             ),
             shadowColor:
-                shadowColor ?? AppColors.purblePrimary, // Removes shadow effect
+                shadowColor ?? AppColors.scaffoldBackgroundColor, // Removes shadow effect
           ),
           child: isLoading
               ? Center(

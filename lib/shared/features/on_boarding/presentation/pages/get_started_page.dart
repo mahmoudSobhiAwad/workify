@@ -46,7 +46,7 @@ class GetStartedPage extends StatelessWidget {
                   "Together we can make a huge success",
                   textAlign: TextAlign.center,
                   style:
-                      AppFontStyle.regular14.copyWith(color: AppColors.grayB2),
+                      AppFontStyle.medium14.copyWith(color: AppColors.grayB2),
                 ),
               ),
               SizedBox(

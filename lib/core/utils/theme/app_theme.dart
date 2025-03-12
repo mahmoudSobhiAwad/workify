@@ -5,6 +5,7 @@ import 'package:workify/core/utils/theme/app_colors.dart';
 class AppTheme {
   static ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
+    appBarTheme: AppBarTheme(color: AppColors.scaffoldBackgroundColor),
     useMaterial3: true,
     primaryColor: AppColors.purblePrimary,
     scaffoldBackgroundColor: AppColors.scaffoldBackgroundColor,

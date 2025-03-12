@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
 
+import 'app_colors.dart';
+
 abstract class AppFontStyle {
   static const TextStyle bold13 = TextStyle(
     fontWeight: FontWeight.bold,
     fontSize: 13,
   );
+  static const TextStyle bold15 = TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 15,
+  );
   static const TextStyle bold21 = TextStyle(
     fontWeight: FontWeight.bold,
     fontSize: 21,
+  );
+  static const TextStyle bold22 = TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 22,
   );
   static const TextStyle bold23 = TextStyle(
     fontWeight: FontWeight.bold,
@@ -97,6 +107,10 @@ abstract class AppFontStyle {
     fontWeight: FontWeight.normal,
     fontSize: 14,
   );
+  static const TextStyle regular14Purple = TextStyle(
+      fontWeight: FontWeight.normal,
+      fontSize: 14,
+      color: AppColors.purblePrimary);
 
   static const TextStyle regular11 = TextStyle(
     fontWeight: FontWeight.normal,
