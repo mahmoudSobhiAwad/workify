@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -8,6 +9,7 @@ import 'package:workify/core/utils/theme/app_font_stlyles.dart';
 import 'package:workify/core/utils/theme/app_icons.dart';
 import 'package:workify/core/utils/theme/app_images.dart';
 import 'package:workify/features/admin/company/data/models/company_model.dart';
+import 'package:workify/features/admin/company/presentation/cubit/company_cubit/company_cubit.dart';
 import 'package:workify/shared/features/on_boarding/presentation/widgets/custom_push_button.dart';
 import 'package:workify/shared/functions/image_of_map.dart';
 import 'package:workify/shared/widgets/custom_cached_image.dart';
@@ -137,6 +139,10 @@ class ComapnyBody extends StatelessWidget {
             context.push(Routes.companySetupPage, extra: {
               "id": companyModel.companyId,
               "model": companyModel,
+            }).then((value) {
+              if (value != null && value == true && context.mounted) {
+                context.read<CompanyCubit>().loadCompanySetup();
+              }
             });
           },
           margin: EdgeInsets.all(16),

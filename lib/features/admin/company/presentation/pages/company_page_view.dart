@@ -4,6 +4,7 @@ import 'package:workify/features/admin/company/presentation/cubit/company_cubit/
 import 'package:workify/features/admin/company/presentation/widgets/company_body.dart';
 import 'package:workify/features/admin/company/presentation/widgets/empty_company.dart';
 import 'package:workify/features/admin/company/presentation/widgets/shimmer_company_body.dart';
+import 'package:workify/shared/widgets/error_widget.dart';
 
 class CompanyPageView extends StatelessWidget {
   const CompanyPageView({super.key});
@@ -18,8 +19,8 @@ class CompanyPageView extends StatelessWidget {
         if (state is LoadingLoadCompanyState) {
           return ShimmerBody();
         } else if (state is FailureLoadCompanyState) {
-          return Center(
-            child: Text(state.errMessage),
+          return ErrorWidgetState(
+            errMessage: state.errMessage,
           );
         } else if (state is SuccessLoadCompanyState) {
           return state.companyModel != null

@@ -119,7 +119,7 @@ class _UpdateUserBodyState extends State<UpdateUserBody> {
                       if (widget.model != null) {
                         CustomToast(
                                 context: context,
-                                type: ToastificationType.info,
+                                type: ToastificationType.warning,
                                 header:
                                     "This is unique value chaning it will change the user")
                             .showBottomToast();

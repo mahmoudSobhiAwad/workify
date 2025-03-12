@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:workify/core/constants/admin_home_nav_bar_list.dart';
 import 'package:workify/core/constants/admin_home_pages.dart';
 import 'package:workify/core/routing/routes.dart';
@@ -139,7 +140,9 @@ final GoRouter router = GoRouter(
           // final args = state.extra as Map;
           return CustomTransitionPage(
             key: state.pageKey,
-            child: GoogleMapScreen(),
+            child: GoogleMapScreen(
+              initialLocation: state.extra as LatLng?,
+            ),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
               return FadeTransition(
