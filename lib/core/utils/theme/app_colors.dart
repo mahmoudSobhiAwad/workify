@@ -7,6 +7,7 @@ class AppColors {
   static const scaffoldBackgroundColor = Color(0xff28333F);
   static const red35 = Color(0xffEA4335);
   static const green53 = Color(0xff34A853);
+  static const green38 = Color(0xff1FAF38);
   static const whiteWithOpacity10 = Color(0x1AFFFFFF);
   static const blackWithOpacity5 = Color(0x0D1C252C);
   static const purblePrimary = Color(0xff7B61FF);

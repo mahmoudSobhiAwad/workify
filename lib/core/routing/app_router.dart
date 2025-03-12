@@ -12,6 +12,7 @@ import 'package:workify/features/admin/auth/presentation/pages/admin_login_view.
 import 'package:workify/features/admin/auth/presentation/pages/admin_sign_up_view.dart';
 import 'package:workify/features/admin/company/presentation/pages/company_setup_view.dart';
 import 'package:workify/features/admin/company/presentation/pages/goolge_map_view.dart';
+import 'package:workify/features/admin/users/presentation/cubit/employee_cubit.dart';
 import 'package:workify/features/admin/users/presentation/pages/update_user_view.dart';
 import 'package:workify/shared/features/basic_preview/data/models/bottom_nav_bar_model.dart';
 import 'package:workify/shared/features/basic_preview/presentation/pages/basic_preview.dart';
@@ -96,10 +97,12 @@ final GoRouter router = GoRouter(
     GoRoute(
         path: Routes.updateUser,
         pageBuilder: (context, state) {
-          // final args = state.extra as Map;
+          final args = state.extra as Map;
           return CustomTransitionPage(
             key: state.pageKey,
-            child: UpdateUserView(),
+            child: UpdateUserView(
+              cubit: args['cubit'] as EmployeeCubit,
+            ),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
               return FadeTransition(
