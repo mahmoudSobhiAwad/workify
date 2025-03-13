@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -28,7 +29,7 @@ class ComapnyEmptyStateView extends StatelessWidget {
               children: [
                 SvgPicture.asset(AppImages.assetsImagesEmptyState),
                 Text(
-                  "Your Company hasn’t Set Yet, please add the required Features",
+                  "company_empty.your_company".tr(),
                   style: AppFontStyle.bold22,
                   textAlign: TextAlign.center,
                 ),
@@ -48,7 +49,7 @@ class ComapnyEmptyStateView extends StatelessWidget {
             backgroundColor: AppColors.green53,
             child: Center(
               child: Text(
-                "Add Setup",
+                "company_empty.add_setup".tr(),
                 style: AppFontStyle.semiBold16,
               ),
             ),
