@@ -25,5 +25,5 @@ Future<void> setUp() async {
   getIt.registerLazySingleton<EmployeeRepository>(
       () => EmployeeRepositoryImpl(getIt.get<FirebaseFirestore>()));
   getIt.registerLazySingleton<LoginEmployeeUseCase>(
-      () => LoginEmployeeUseCase(getIt.get<EmployeeRepository>()));
+      () => LoginEmployeeUseCase(repository:getIt.get<EmployeeRepository>()));
 }

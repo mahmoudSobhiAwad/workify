@@ -8,15 +8,15 @@ import '../../features/employee/finger_print/presentation/pages/finger_print_pag
 import '../../features/employee/home/presentation/pages/home_page.dart';
 import '../../shared/features/settings/presentation/pages/settings_page.dart';
 
-List<Widget> adminHomePages = [
+List<Widget> adminHomePages = const [
   AdminHomePage(),
   UserPageView(),
   CompanyPageView(),
   SettingView(),
 ];
 
-List<Widget> employeeHomePages = [
-  FingerPrint(),
+List<Widget> employeeHomePages = const [
   HomePage(),
+  FingerPrint(),
   SettingPage(),
 ];

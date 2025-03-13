@@ -56,21 +56,54 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: 20),
-                  Row(
-                    children: [
-                      SalaryContainer(
-                        color: AppColors.green53,
-                        title: 'Total Salary',
-                        salary: '12,000 LE',
-                      ),
-                      Spacer(),
-                      AttendanceContainer(
-                        color: AppColors.green53,
-                        title: 'Leave Balance',
-                        count: '4',
-                      ),
-                      Spacer(),
-                    ],
+                  IntrinsicHeight(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ...List.generate(2, (index) {
+                          return Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 30, vertical: 16),
+                            decoration: BoxDecoration(
+                              color: AppColors.whiteWithOpacity10,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(20),
+                              ),
+                            ),
+                            child: [
+                              Column(
+                                children: [
+                                  Text("Total Salary",style: AppFontStyle.semiBold14,),
+                                  SizedBox(
+                                    height: 16,
+                                  ),
+                                  Text(
+                                    "12,000 LE",
+                                    style: AppFontStyle.semiBold18,
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Text("Leave Balance",style: AppFontStyle.semiBold14),
+                                  SizedBox(
+                                    height: 16,
+                                  ),
+                                  CircleAvatar(
+                                    radius: 25,
+                                    backgroundColor: AppColors.green53,
+                                    child: Text(
+                                      '4',
+                                      style: AppFontStyle.semiBold18.copyWith(color: AppColors.whiteff),
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ][index],
+                          );
+                        }),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -95,8 +128,7 @@ class HomePage extends StatelessWidget {
                 padding: EdgeInsets.only(
                   left: 16,
                   right: 16,
-                  bottom:
-                      80, // Added bottom padding to account for bottom nav bar
+                 
                 ),
                 children: [
                   MovementItem(

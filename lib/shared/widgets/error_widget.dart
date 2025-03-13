@@ -11,23 +11,20 @@ class ErrorWidgetState extends StatelessWidget {
   final String errMessage;
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        spacing: 10,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Expanded(child: SvgPicture.asset(AppImages.errorImages)),
-          Text(
-            errMessage,
-            style: AppFontStyle.semiBold22,
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(
-            height: 50,
-          )
-        ],
-      ),
+    return Column(
+      spacing: 10,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Expanded(child: SvgPicture.asset(AppImages.errorImages)),
+        Text(
+          errMessage,
+          style: AppFontStyle.semiBold22,
+          textAlign: TextAlign.center,
+        ),
+        SizedBox(
+          height: 50,
+        )
+      ],
     );
   }
 }
-
