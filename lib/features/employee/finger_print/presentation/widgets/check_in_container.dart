@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -63,7 +64,7 @@ class CheckInContainer extends StatelessWidget {
               ),
               SizedBox(height: 16),
               Text(
-                'Check In',
+                'fingerprint.check_in'.tr(),
                 style: AppFontStyle.bold23.copyWith(color: Colors.white),
               ),
             ],

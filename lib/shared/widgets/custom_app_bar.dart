@@ -1,4 +1,4 @@
-// import 'package:easy_localization/easy_localization.dart';
+ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -30,7 +30,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           ? IconButton(
               onPressed: onBack ?? () => context.pop(),
               icon: RotatedBox(
-                  quarterTurns: 2,
+                  quarterTurns:context.locale.languageCode=='en'?2:0,
                   child:
                       SvgPicture.asset(AppIcons.assetsIconsArrowRightBroken)))
           : null,

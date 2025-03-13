@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -33,7 +34,7 @@ class _RoleSelectPageState extends State<RoleSelectPage> {
                       height: 25,
                     ),
                     Text(
-                      "Select Your Role",
+                      "role_select.choose_role".tr(),
                       style: AppFontStyle.bold21,
                     ),
                     SizedBox(
@@ -69,7 +70,7 @@ class _RoleSelectPageState extends State<RoleSelectPage> {
                               ),
                             ),
                             Text(
-                              roleList[index].roleType,
+                              roleList[index].roleType.tr(),
                               style: AppFontStyle.semiBold18,
                             )
                           ],
@@ -98,14 +99,17 @@ class _RoleSelectPageState extends State<RoleSelectPage> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    "Next",
+                    "role_select.next".tr(),
                     style: AppFontStyle.semiBold16,
                     textAlign: TextAlign.start,
                   ),
-                  SvgPicture.asset(
-                    AppIcons.assetsIconsArrowRightBroken,
-                    height: 18,
-                    width: 18,
+                  RotatedBox(
+                    quarterTurns: context.locale.languageCode=='en'?0:2,
+                    child: SvgPicture.asset(
+                      AppIcons.assetsIconsArrowRightBroken,
+                      height: 18,
+                      width: 18,
+                    ),
                   ),
                 ],
               ),

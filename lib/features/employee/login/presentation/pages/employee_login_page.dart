@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -77,9 +78,9 @@ class _LoginEmpBodyState extends State<LoginEmpBody> {
         child: Column(
           children: [
             Align(
-              alignment: Alignment.centerLeft,
+              alignment: AlignmentDirectional.centerStart,
               child: Text(
-                "Login",
+                "login.login".tr(),
                 style: AppFontStyle.bold21,
               ),
             ),
@@ -87,7 +88,7 @@ class _LoginEmpBodyState extends State<LoginEmpBody> {
               height: 20,
             ),
             CustomTextFormField(
-              hintText: "User Name",
+              hintText: "login.email".tr(),
               controller: userNameController,
               textInputType: TextInputType.emailAddress,
               validator: (value) {
@@ -102,7 +103,7 @@ class _LoginEmpBodyState extends State<LoginEmpBody> {
             ),
             CustomTextFormField(
               controller: passwordController,
-              hintText: "Password",
+              hintText: "login.password".tr(),
               maxLine: 1,
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -142,7 +143,7 @@ class _LoginEmpBodyState extends State<LoginEmpBody> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        "Login",
+                        "login.log_in".tr(),
                         style: AppFontStyle.semiBold16,
                         textAlign: TextAlign.start,
                       ),

@@ -30,19 +30,21 @@ class FingerPrintCubit extends Cubit<FingerPrintState> {
       jsonDecode(AppSharedPreferences.getString(key: AppStrings.userModelKey)!)[
           'companyLocation']['long'] as double);
   Future<void> getUserLocation() async {
-    emit(LoadingGetUserLocationState());
-    var status = await Permission.location.request();
-    if (status.isGranted) {
-      try {
-        Position position = await Geolocator.getCurrentPosition();
-        emit(SuccessGetUserLocationState(position: position));
-      } catch (e) {
-        emit(FailureGetUserLocationState(errMessage: e.toString()));
+    try {
+      emit(LoadingGetUserLocationState());
+      var status = await Permission.location.request();
+      if (status.isGranted) {
+        try {
+          Position position = await Geolocator.getCurrentPosition();
+          emit(SuccessGetUserLocationState(position: position));
+        } catch (e) {
+          emit(FailureGetUserLocationState(errMessage: e.toString()));
+        }
+      } else {
+        emit(FailureGetUserLocationState(
+            errMessage: "You deneid the Access To Your Location"));
       }
-    } else {
-      emit(FailureGetUserLocationState(
-          errMessage: "You deneid the Access To Your Location"));
-    }
+    } catch (e) {}
   }
 
   Future<void> loadDayMovements() async {
@@ -50,7 +52,7 @@ class FingerPrintCubit extends Cubit<FingerPrintState> {
     try {
       emit(LoadingGetMovementOfDay());
       final result = await _fireStore
-          .collection("compaines")
+          .collection("companies")
           .doc(companyId)
           .collection("movements")
           .doc(formattedDay)
@@ -75,7 +77,7 @@ class FingerPrintCubit extends Cubit<FingerPrintState> {
       emit(LoadingAddMovementState());
       String formattedDay = DateFormat('d MMM yyyy').format(DateTime.now());
       await _fireStore
-          .collection("compaines")
+          .collection("companies")
           .doc(companyId)
           .collection("movements")
           .doc(formattedDay)
@@ -88,5 +90,4 @@ class FingerPrintCubit extends Cubit<FingerPrintState> {
     }
   }
 
-  // Future<void> checkAuth() async {}
 }

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -60,14 +61,14 @@ class _CompanySelectorBodyState extends State<CompanySelectorBody> {
           height: 25,
         ),
         Text(
-          'Select Your Company',
+          'company_select.select_company'.tr(),
           style: AppFontStyle.bold21,
         ),
         SizedBox(
           height: 20,
         ),
         CustomTextFormField(
-          hintText: "Search For ...",
+          hintText: "company_select.search".tr(),
         ),
         SizedBox(
           height: 30,
@@ -170,14 +171,17 @@ class _CompanySelectorBodyState extends State<CompanySelectorBody> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    "Next",
+                    "company_select.next".tr(),
                     style: AppFontStyle.semiBold16,
                     textAlign: TextAlign.start,
                   ),
-                  SvgPicture.asset(
-                    AppIcons.assetsIconsArrowRightBroken,
-                    height: 18,
-                    width: 18,
+                  RotatedBox(
+                    quarterTurns: context.locale.languageCode == 'en' ? 0 : 2,
+                    child: SvgPicture.asset(
+                      AppIcons.assetsIconsArrowRightBroken,
+                      height: 18,
+                      width: 18,
+                    ),
                   ),
                 ],
               ),

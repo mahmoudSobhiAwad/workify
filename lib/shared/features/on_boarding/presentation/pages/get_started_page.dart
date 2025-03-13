@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -43,7 +44,7 @@ class GetStartedPage extends StatelessWidget {
               SizedBox(
                 width: 180,
                 child: Text(
-                  "Together we can make a huge success",
+                  "get_started.subtitle".tr(),
                   textAlign: TextAlign.center,
                   style:
                       AppFontStyle.medium14.copyWith(color: AppColors.grayB2),
@@ -60,7 +61,7 @@ class GetStartedPage extends StatelessWidget {
                 backgroundColor: AppColors.purblePrimary,
                 child: Center(
                   child: Text(
-                    "Get Started",
+                    "get_started.get_started".tr(),
                     style: AppFontStyle.semiBold16,
                   ),
                 ),

@@ -8,6 +8,6 @@ class RoleModel {
 }
 
 List<RoleModel> roleList = [
-  RoleModel(roleType: "Manager", imagePath: AppImages.assetsImagesMangerLogo),
-  RoleModel(roleType: "Employee", imagePath: AppImages.assetsImagesEmployeeLog),
+  RoleModel(roleType: "role_select.manager", imagePath: AppImages.assetsImagesMangerLogo),
+  RoleModel(roleType: "role_select.emp", imagePath: AppImages.assetsImagesEmployeeLog),
 ];
