@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:workify/core/storage/cache_helper.dart';
 import 'package:workify/core/utils/theme/app_colors.dart';
@@ -17,7 +18,7 @@ class SettingView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
-            "Setting",
+            "settings.settings".tr(),
             style: AppFontStyle.bold22,
           ),
           SizedBox(
@@ -57,7 +58,7 @@ class SettingView extends StatelessWidget {
             height: 30,
           ),
           CustomSettingsItem(
-            label: 'Language',
+            label: 'settings.language'.tr(),
             iconPath: AppIcons.assetsIconsLanguageIcon,
             suffixIcon: AppIcons.assetsIconsArrowDownIcon,
           ),
@@ -65,7 +66,7 @@ class SettingView extends StatelessWidget {
             height: 30,
           ),
           CustomSettingsItem(
-            label: 'Change Password',
+            label: 'settings.change_password'.tr(),
             iconPath: AppIcons.assetsIconsChangePassIcon,
           ),
           SizedBox(
@@ -75,7 +76,7 @@ class SettingView extends StatelessWidget {
             onTap: () async {
               await AppSharedPreferences.clearAll();
             },
-            label: 'Log out',
+            label: 'settings.logout'.tr(),
             iconPath: AppIcons.assetsIconsLogOutIcon,
           )
         ],

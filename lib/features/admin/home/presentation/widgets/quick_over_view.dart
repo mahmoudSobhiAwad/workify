@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:workify/core/utils/theme/app_colors.dart';
 import 'package:workify/core/utils/theme/app_font_stlyles.dart';
@@ -41,7 +42,7 @@ class QuickOverView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    'Hello,',
+                    'admin_home.hello'.tr(),
                     style: AppFontStyle.medium15,
                   ),
                   Text(
@@ -64,7 +65,7 @@ class QuickOverView extends StatelessWidget {
             child: Row(
               children: [
                 Text(
-                  'Total Employees',
+                  'admin_home.total'.tr(),
                   style: AppFontStyle.bold19,
                 ),
                 Spacer(),
@@ -89,17 +90,17 @@ class QuickOverView extends StatelessWidget {
                 return [
                   AttendanceContainer(
                       color: AppColors.green53,
-                      title: 'On Time',
+                      title: 'admin_home.on_time'.tr(),
                       count: '8',
                       icon: AppIcons.assetsIconsCircularCheckIcon),
                   AttendanceContainer(
                       color: AppColors.yellow3c,
-                      title: 'Delayed',
+                      title: 'admin_home.delayed'.tr(),
                       count: '4',
                       icon: AppIcons.assetsIconsTimerIcon),
                   AttendanceContainer(
                       color: AppColors.red35,
-                      title: 'Absent',
+                      title: 'admin_home.absent'.tr(),
                       count: '4',
                       icon: AppIcons.assetsIconsCircularCloseIcon),
                 ][index];
