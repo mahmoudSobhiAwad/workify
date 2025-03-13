@@ -39,7 +39,7 @@ class MovementItem extends StatelessWidget {
                         SvgPicture.asset(AppIcons.assetsIconsEmployeeIcon),
                         SizedBox(width: 4),
                         Text(
-                          'Employee Name',
+                          "emp_home.emp_name".tr(),
                           style: AppFontStyle.regular12,
                         ),
                       ],
@@ -67,7 +67,7 @@ class MovementItem extends StatelessWidget {
                       SvgPicture.asset(AppIcons.assetsIconsCheckIn),
                       SizedBox(width: 4),
                       Text(
-                        'Check In',
+                        "emp_home.check_in".tr(),
                         style: AppFontStyle.regular12,
                       ),
                     ],
@@ -94,7 +94,7 @@ class MovementItem extends StatelessWidget {
                       SvgPicture.asset(AppIcons.assetsIconsCheckOut),
                       SizedBox(width: 4),
                       Text(
-                        'Check Out',
+                        "emp_home.check_out".tr(),
                         style: AppFontStyle.regular12,
                       ),
                     ],

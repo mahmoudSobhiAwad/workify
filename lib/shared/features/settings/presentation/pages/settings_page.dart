@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:workify/core/storage/cache_helper.dart';
@@ -18,7 +19,7 @@ class SettingPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Settings",
+                "settings.settings".tr(),
                 style: AppFontStyle.bold23,
               ),
               SizedBox(height: 24),
@@ -77,7 +78,7 @@ class SettingPage extends StatelessWidget {
               ExpansionTile(
                 leading: SvgPicture.asset(AppIcons.assetsIconsLanguageIcon),
                 title: Text(
-                  'Language',
+                  "settings.language".tr(),
                   style: AppFontStyle.medium15,
                 ),
                 children: [
@@ -98,7 +99,7 @@ class SettingPage extends StatelessWidget {
               ListTile(
                 leading: SvgPicture.asset(AppIcons.assetsIconsChangePassIcon),
                 title: Text(
-                  'Change Password',
+                  "settings.change_password".tr(),
                   style: AppFontStyle.medium15,
                 ),
                 onTap: () {
@@ -107,7 +108,7 @@ class SettingPage extends StatelessWidget {
               ),
               ListTile(
                 leading: SvgPicture.asset(AppIcons.assetsIconsLogOutIcon),
-                title: Text('Logout', style: AppFontStyle.medium15),
+                title: Text("settings.logout".tr(), style: AppFontStyle.medium15),
                 onTap: () async {
                   await AppSharedPreferences.clearAll();
 

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -60,8 +61,8 @@ class _FingerPrintBodyState extends State<FingerPrintBody> {
               movementModel = state.movementModel;
               movementModel = state.movementModel;
               String message = state.movementModel?.checkOut == null
-                  ? "Check-In Successfully"
-                  : "Check-Out Successfully";
+                  ? 'fingerprint.check_in_success'.tr()
+                  : 'fingerprint.check_out_success'.tr();
               CustomToast(
                       context: context,
                       header: message,
@@ -70,7 +71,7 @@ class _FingerPrintBodyState extends State<FingerPrintBody> {
             } else if (state is FailureAddMovementState) {
               CustomToast(
                 context: context,
-                header: "Check-In Failed",
+                header: 'fingerprint.check_in_failed'.tr(),
                 description: state.errMessage,
               ).showBottomToast();
             }
