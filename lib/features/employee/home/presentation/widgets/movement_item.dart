@@ -1,19 +1,17 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:workify/core/utils/theme/app_colors.dart';
 import 'package:workify/core/utils/theme/app_font_stlyles.dart';
 import 'package:workify/core/utils/theme/app_icons.dart';
+import 'package:workify/features/employee/finger_print/data/models/movement_model.dart';
 
 class MovementItem extends StatelessWidget {
   const MovementItem({
-    required this.name,
-    required this.inTime,
-    required this.outTime,
+    required this.model,
     super.key,
   });
-  final String name;
-  final String inTime;
-  final String outTime;
+  final MovementModel model;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -50,7 +48,7 @@ class MovementItem extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 18.0, top: 10.0),
                     child: Text(
-                      name,
+                      model.fullName ?? "",
                       style: AppFontStyle.semiBold14,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -77,7 +75,7 @@ class MovementItem extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 15.0, top: 10.0),
                     child: Text(
-                      inTime,
+                      formatDateTime(model.checkIn ?? DateTime.now()),
                       style: AppFontStyle.semiBold14,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -104,7 +102,7 @@ class MovementItem extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 15.0, top: 10.0),
                     child: Text(
-                      outTime,
+                      formatDateTime(model.checkOut ?? DateTime.now()),
                       style: AppFontStyle.semiBold14,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -117,4 +115,8 @@ class MovementItem extends StatelessWidget {
       ),
     );
   }
+}
+
+String formatDateTime(DateTime dateTime) {
+  return DateFormat('h:mm a').format(dateTime); // Converts to "10:38 PM"
 }
