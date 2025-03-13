@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:workify/core/constants/admin_home_nav_bar_list.dart';
 import 'package:workify/core/constants/admin_home_pages.dart';
 import 'package:workify/core/routing/routes.dart';
@@ -11,6 +12,9 @@ import 'package:workify/core/utils/constants/enums.dart';
 import 'package:workify/features/admin/auth/presentation/pages/admin_login_view.dart';
 import 'package:workify/features/admin/auth/presentation/pages/admin_sign_up_view.dart';
 import 'package:workify/features/admin/company/presentation/pages/company_setup_view.dart';
+import 'package:workify/features/admin/company/presentation/pages/goolge_map_view.dart';
+import 'package:workify/features/admin/users/data/models/notification_model.dart';
+import 'package:workify/features/admin/users/presentation/cubit/employee_cubit.dart';
 import 'package:workify/features/admin/users/presentation/pages/update_user_view.dart';
 import 'package:workify/shared/features/basic_preview/data/models/bottom_nav_bar_model.dart';
 import 'package:workify/shared/features/basic_preview/presentation/pages/basic_preview.dart';
@@ -95,10 +99,13 @@ final GoRouter router = GoRouter(
     GoRoute(
         path: Routes.updateUser,
         pageBuilder: (context, state) {
-          // final args = state.extra as Map;
+          final args = state.extra as Map;
           return CustomTransitionPage(
             key: state.pageKey,
-            child: UpdateUserView(),
+            child: UpdateUserView(
+              cubit: args['cubit'] as EmployeeCubit,
+              model: args['model'] as EmployeeModel,
+            ),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
               return FadeTransition(
@@ -111,10 +118,31 @@ final GoRouter router = GoRouter(
     GoRoute(
         path: Routes.companySetupPage,
         pageBuilder: (context, state) {
+          final args = state.extra as Map<String, dynamic>;
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: CompanySetupView(
+              companyId: args['id'],
+              companyModel: args['model'],
+            ),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+          );
+        }),
+    GoRoute(
+        path: Routes.mapView,
+        pageBuilder: (context, state) {
           // final args = state.extra as Map;
           return CustomTransitionPage(
             key: state.pageKey,
-            child: CompanySetupView(),
+            child: GoogleMapScreen(
+              initialLocation: state.extra as LatLng?,
+            ),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
               return FadeTransition(

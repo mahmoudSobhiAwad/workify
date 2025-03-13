@@ -7,25 +7,30 @@ class CustomSettingsItem extends StatelessWidget {
       {required this.label,
       required this.iconPath,
       this.suffixIcon,
+      this.onTap,
       super.key});
   final String? suffixIcon;
   final String label;
   final String iconPath;
+  final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        SvgPicture.asset(iconPath),
-        SizedBox(
-          width: 10,
-        ),
-        Text(
-          label,
-          style: AppFontStyle.regular16,
-        ),
-        Spacer(),
-        if (suffixIcon != null) SvgPicture.asset(suffixIcon!),
-      ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Row(
+        children: [
+          SvgPicture.asset(iconPath),
+          SizedBox(
+            width: 10,
+          ),
+          Text(
+            label,
+            style: AppFontStyle.regular16,
+          ),
+          Spacer(),
+          if (suffixIcon != null) SvgPicture.asset(suffixIcon!),
+        ],
+      ),
     );
   }
 }

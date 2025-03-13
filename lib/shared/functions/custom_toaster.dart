@@ -3,7 +3,7 @@ import 'package:toastification/toastification.dart';
 import 'package:workify/core/utils/theme/app_font_stlyles.dart';
 
 class CustomToast {
-  final BuildContext context;
+  final BuildContext? context;
   final String header;
   final String? description;
   ToastificationType? type;
@@ -12,7 +12,7 @@ class CustomToast {
       {required this.context,
       required this.header,
       this.description,
-      this.type = ToastificationType.success});
+      this.type = ToastificationType.error});
 
   void showBottomToast() {
     toastification.show(

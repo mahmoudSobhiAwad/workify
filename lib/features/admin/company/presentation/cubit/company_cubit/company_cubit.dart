@@ -13,12 +13,15 @@ class CompanyCubit extends Cubit<CompanyState> {
   final String id = jsonDecode(AppSharedPreferences.sharedPreferences
           .getString(AppStrings.userModelKey) ??
       "")['id'];
+
   Future<void> loadCompanySetup() async {
     emit(LoadingLoadCompanyState());
     try {
       final result = await FirebaseFirestore.instance
           .collection("companies")
           .doc(id)
+          .collection("info")
+          .doc("companyInfo")
           .get();
 
       if (result.exists) {

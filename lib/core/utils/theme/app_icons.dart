@@ -156,4 +156,6 @@ class AppIcons {
   /// assets/icons/whatsapp_icon.svg
   static const String assetsIconsWhatsappIcon =
       "assets/icons/whatsapp_icon.svg";
+  static const String assetsIconsProfileIcon =
+      "assets/icons/custom_profile.svg";
 }

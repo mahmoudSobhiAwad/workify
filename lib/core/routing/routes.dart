@@ -7,4 +7,5 @@ class Routes {
   static const String companySetupPage = '/company_setup';
   static const String adminLogin = '/admin_login';
   static const String adminSignUp = '/admin_sign_up';
+  static const String mapView = '/map_view';
 }
