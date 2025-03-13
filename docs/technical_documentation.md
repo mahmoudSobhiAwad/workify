@@ -143,6 +143,9 @@ class CacheHelper {
 
 ## UI/UX Components
 
+
+### [UI Design](https://www.figma.com/design/C19IBIHuz2NikaC2l366X8/Workify?node-id=6849-308&t=tOKN7rCQP5PfUOQs-0)
+
 ### Custom Widgets
 - Loading indicators
 - Error handlers
