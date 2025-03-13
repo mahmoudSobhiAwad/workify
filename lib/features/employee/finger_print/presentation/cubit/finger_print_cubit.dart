@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -84,10 +85,33 @@ class FingerPrintCubit extends Cubit<FingerPrintState> {
           .collection("employeeMovement")
           .doc(userName)
           .set(movementModel.toMap());
+
       emit(SuccessAddMovementState(movementModel: movementModel));
+      await addIntoEmployees(movementModel);
     } catch (e) {
       emit(FailureGetMovementOfDay(errMessage: e.toString()));
     }
   }
 
+  Future<void> addIntoEmployees(MovementModel model) async {
+    try {
+      DocumentReference docRef = _fireStore
+          .collection("companies")
+          .doc(companyId)
+          .collection('employees')
+          .doc(userName);
+      String formattedDay = DateFormat('d MMM yyyy').format(DateTime.now());
+
+      await docRef.set(
+        {
+          'movements': {
+            formattedDay: model.toMap(),
+          }
+        },
+        SetOptions(merge: true), // Prevents overwriting existing data
+      );
+    } catch (e) {
+      log(e.toString());
+    }
+  }
 }
