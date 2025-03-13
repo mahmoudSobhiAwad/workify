@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:workify/core/storage/cache_helper.dart';
 import 'package:workify/core/utils/theme/app_colors.dart';
 import 'package:workify/core/utils/theme/app_font_stlyles.dart';
 import 'package:workify/core/utils/theme/app_icons.dart';
@@ -108,7 +109,9 @@ class SettingPage extends StatelessWidget {
               ListTile(
                 leading: SvgPicture.asset(AppIcons.assetsIconsLogOutIcon),
                 title: Text('Logout', style: AppFontStyle.medium15),
-                onTap: () {
+                onTap: () async {
+                  await AppSharedPreferences.clearAll();
+
                   // Handle logout
                 },
               ),

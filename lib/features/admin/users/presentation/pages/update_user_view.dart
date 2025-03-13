@@ -7,7 +7,7 @@ import 'package:toastification/toastification.dart';
 import 'package:workify/core/utils/theme/app_colors.dart';
 import 'package:workify/core/utils/theme/app_font_stlyles.dart';
 import 'package:workify/core/utils/theme/app_icons.dart';
-import 'package:workify/features/admin/users/data/models/notification_model.dart';
+import 'package:workify/features/admin/users/data/models/employee_model.dart';
 import 'package:workify/features/admin/users/presentation/cubit/employee_cubit.dart';
 import 'package:workify/shared/features/on_boarding/presentation/widgets/custom_push_button.dart';
 import 'package:workify/shared/functions/custom_pop_menu.dart';

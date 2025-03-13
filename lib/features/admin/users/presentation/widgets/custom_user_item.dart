@@ -6,7 +6,7 @@ import 'package:workify/core/routing/routes.dart';
 import 'package:workify/core/utils/theme/app_colors.dart';
 import 'package:workify/core/utils/theme/app_font_stlyles.dart';
 import 'package:workify/core/utils/theme/app_icons.dart';
-import 'package:workify/features/admin/users/data/models/notification_model.dart';
+import 'package:workify/features/admin/users/data/models/employee_model.dart';
 import 'package:workify/features/admin/users/presentation/cubit/employee_cubit.dart';
 import 'package:workify/shared/functions/custom_toaster.dart';
 import 'package:workify/shared/widgets/custom_two_option_dialog.dart';

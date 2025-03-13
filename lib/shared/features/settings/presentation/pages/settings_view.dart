@@ -73,6 +73,7 @@ class SettingView extends StatelessWidget {
           ),
           CustomSettingsItem(
             onTap: () async {
+              print("d");
               await AppSharedPreferences.clearAll();
             },
             label: 'Log out',

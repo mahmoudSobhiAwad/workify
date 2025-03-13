@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:workify/core/routing/routes.dart';
 import 'package:workify/core/utils/theme/app_colors.dart';
 import 'package:workify/core/utils/theme/app_font_stlyles.dart';
+import 'package:workify/core/utils/theme/app_icons.dart';
 import 'package:workify/core/utils/theme/app_images.dart';
-import 'package:workify/features/employee/company_select/domain/company_model.dart';
-import 'package:workify/features/employee/login/presentation/employee_login_page.dart';
-
-import '../../../../core/utils/theme/app_icons.dart';
-import '../../../../shared/features/on_boarding/presentation/widgets/custom_push_button.dart';
+import 'package:workify/features/admin/company/data/models/company_model.dart';
+import 'package:workify/features/employee/company_select/presentation/cubit/company_selector_cubit.dart';
+import 'package:workify/shared/features/on_boarding/presentation/widgets/custom_push_button.dart';
+import 'package:workify/shared/widgets/custom_cached_image.dart';
+import 'package:workify/shared/widgets/custom_text_form_field.dart';
+import 'package:workify/shared/widgets/error_widget.dart';
+import 'package:workify/shared/widgets/shimmer_loading.dart';
 
 class CompanySelectPage extends StatefulWidget {
   const CompanySelectPage({super.key});
@@ -17,65 +23,70 @@ class CompanySelectPage extends StatefulWidget {
 }
 
 class _CompanySelectPageState extends State<CompanySelectPage> {
-  int _selectedCompany = -1;
-  final TextEditingController _searchController = TextEditingController();
-
-  @override
-  void dispose() {
-    _searchController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Column(
-          children: [
-            SvgPicture.asset(AppImages.assetsImagesAppLogo),
-            SizedBox(
-              height: 25,
-            ),
-            Text(
-              'Select Your Company',
-              style: AppFontStyle.bold21,
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            TextField(
-              controller: _searchController,
-              decoration: InputDecoration(
-                hintText: 'search',
-                hintStyle:
-                    TextStyle(color: Colors.grey.shade500, fontSize: 16),
-                prefixIcon: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: SvgPicture.asset(
-                    AppIcons.assetsIconsSearchIcon,
-                  ),
-                ),
-                filled: true,
-                fillColor: AppColors.whiteWithOpacity10,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide.none,
-                ),
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-              ),
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-              ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Expanded(
+    return BlocProvider<CompanySelectorCubit>(
+      create: (context) => CompanySelectorCubit()..loadAllCompanies(),
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: SafeArea(
+            child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: CompanySelectorBody(),
+        )),
+      ),
+    );
+  }
+}
+
+class CompanySelectorBody extends StatefulWidget {
+  const CompanySelectorBody({
+    super.key,
+  });
+
+  @override
+  State<CompanySelectorBody> createState() => _CompanySelectorBodyState();
+}
+
+class _CompanySelectorBodyState extends State<CompanySelectorBody> {
+  int _selectedIndex = -1;
+  List<CompanyModel> compainesList = [];
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SvgPicture.asset(AppImages.assetsImagesAppLogo),
+        SizedBox(
+          height: 25,
+        ),
+        Text(
+          'Select Your Company',
+          style: AppFontStyle.bold21,
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        CustomTextFormField(
+          hintText: "Search For ...",
+        ),
+        SizedBox(
+          height: 30,
+        ),
+        BlocBuilder<CompanySelectorCubit, CompanySelectorState>(
+          builder: (context, state) {
+            if (state is LoadingGetAllCompainesState) {
+              return Expanded(
+                  child: ShimmerGrid(
+                shape: BoxShape.circle,
+              ));
+            } else if (state is FailureGetAllCompainesState) {
+              return ErrorWidgetState(errMessage: state.errMessage);
+            } else if (state is SuccessGetAllCompainesState) {
+              compainesList = state.compainesList;
+            } else if (state is ChangeSelectedCompanyState) {
+              _selectedIndex = state.value;
+            }
+            return Expanded(
               child: GridView.builder(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
@@ -85,42 +96,47 @@ class _CompanySelectPageState extends State<CompanySelectPage> {
                     mainAxisSpacing: 10,
                     childAspectRatio: 0.7,
                   ),
-                  itemCount: companyList.length,
+                  itemCount: compainesList.length,
                   itemBuilder: (context, index) {
                     return Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        InkWell(
-                          overlayColor: WidgetStatePropertyAll(
-                            AppColors.scaffoldBackgroundColor,
-                          ),
+                        GestureDetector(
                           onTap: () {
-                            _selectedCompany = index;
-                            setState(() {});
+                            context
+                                .read<CompanySelectorCubit>()
+                                .changeSelector(index);
                           },
                           child: Container(
-                            width: 100,
-                            height: 100,
-                            padding: const EdgeInsets.all(15),
+                            width: 105,
+                            height: 105,
+                            padding: const EdgeInsets.all(5),
                             decoration: BoxDecoration(
                                 color: AppColors.whiteWithOpacity10,
                                 shape: BoxShape.circle,
-                                border: _selectedCompany == index
+                                border: _selectedIndex == index
                                     ? Border.all(
                                         width: 4,
                                         color: AppColors.purblePrimary,
                                       )
                                     : null),
-                            child: SvgPicture.asset(
-                              companyList[index].imagePath,
-                            ),
+                            child: compainesList[index].companyLogo != null
+                                ? ClipRRect(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(50)),
+                                    child: CustomCachedImage(
+                                      imagePath:
+                                          compainesList[index].companyLogo!,
+                                    ),
+                                  )
+                                : null,
                           ),
                         ),
                         SizedBox(
                           height: 8,
                         ),
                         Text(
-                          companyList[index].companyName,
+                          compainesList[index].companyName,
                           style: AppFontStyle.semiBold18,
                           textAlign: TextAlign.center,
                           maxLines: 1,
@@ -129,16 +145,25 @@ class _CompanySelectPageState extends State<CompanySelectPage> {
                       ],
                     );
                   }),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            CustomPushButton(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => EmployeeLoginPage()));
-              },
+            );
+          },
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        BlocBuilder<CompanySelectorCubit, CompanySelectorState>(
+          builder: (context, state) {
+            return CustomPushButton(
+              onTap: _selectedIndex != -1
+                  ? () {
+                      context.push(Routes.employeeLogin,
+                          extra: compainesList[_selectedIndex]);
+                    }
+                  : null,
               margin: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-              backgroundColor: AppColors.purblePrimary,
+              backgroundColor: _selectedIndex == -1
+                  ? AppColors.whiteWithOpacity10
+                  : AppColors.purblePrimary,
               child: Row(
                 spacing: 5,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -156,10 +181,10 @@ class _CompanySelectPageState extends State<CompanySelectPage> {
                   ),
                 ],
               ),
-            ),
-          ],
+            );
+          },
         ),
-      )),
+      ],
     );
   }
 }
