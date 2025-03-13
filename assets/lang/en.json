@@ -53,7 +53,8 @@
     "search": "Search",
     "add": "Add New",
     "edit": "Edit",
-    "delete": "Delete"
+    "delete": "Delete",
+    "no_data": "No Data, Try Adding Data"
   },
   "add_emp": {
     "account": "Account",
@@ -74,9 +75,7 @@
   },
   "company_empty": {
     "company": "Company",
-    "your_company": "Your Company Hasn't Been Set Yet,",
-    "please_add": "Please Add The Required",
-    "features": "Features",
+    "your_company": "Your company hasn't been set yet, Please add the required features",
     "add_setup": "Add Setup"
   },
   "company_add": {

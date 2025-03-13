@@ -1,9 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workify/core/utils/theme/app_colors.dart';
 import 'package:workify/core/utils/theme/app_font_stlyles.dart';
 import 'package:workify/core/utils/theme/app_icons.dart';
 import 'package:workify/features/admin/home/presentation/widgets/custom_attendance_container.dart';
+
+import 'package:workify/features/admin/home/presentation/cubit/home_cubit.dart';
 
 class QuickOverView extends StatelessWidget {
   const QuickOverView({
@@ -12,6 +15,7 @@ class QuickOverView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit=context.read<HomeCubit>();
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
       decoration: BoxDecoration(
@@ -73,7 +77,7 @@ class QuickOverView extends StatelessWidget {
                   radius: 25,
                   backgroundColor: AppColors.purblePrimary,
                   child: Text(
-                    '16',
+                    cubit.movements.length.toString(),
                     style: AppFontStyle.bold21,
                   ),
                 )
@@ -91,17 +95,17 @@ class QuickOverView extends StatelessWidget {
                   AttendanceContainer(
                       color: AppColors.green53,
                       title: 'admin_home.on_time'.tr(),
-                      count: '8',
+                      count: '0',
                       icon: AppIcons.assetsIconsCircularCheckIcon),
                   AttendanceContainer(
                       color: AppColors.yellow3c,
                       title: 'admin_home.delayed'.tr(),
-                      count: '4',
+                      count: '1',
                       icon: AppIcons.assetsIconsTimerIcon),
                   AttendanceContainer(
                       color: AppColors.red35,
                       title: 'admin_home.absent'.tr(),
-                      count: '4',
+                      count: '0',
                       icon: AppIcons.assetsIconsCircularCloseIcon),
                 ][index];
               }),
