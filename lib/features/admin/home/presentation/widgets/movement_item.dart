@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:workify/core/utils/theme/app_colors.dart';
@@ -39,7 +40,7 @@ class MovementItem extends StatelessWidget {
                     width: 5,
                   ),
                   Text(
-                    'Emp Name',
+                    'admin_home.emp_name'.tr(),
                     style: AppFontStyle.regular14,
                   ),
                 ],
@@ -62,7 +63,7 @@ class MovementItem extends StatelessWidget {
                     width: 5,
                   ),
                   Text(
-                    'Check In',
+                    'admin_home.check_in'.tr(),
                     style: AppFontStyle.regular14,
                   ),
                 ],
@@ -85,7 +86,7 @@ class MovementItem extends StatelessWidget {
                     width: 5,
                   ),
                   Text(
-                    'Check Out',
+                    'admin_home.check_out'.tr(),
                     style: AppFontStyle.regular14,
                   ),
                 ],

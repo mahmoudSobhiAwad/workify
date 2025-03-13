@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:workify/core/utils/theme/app_font_stlyles.dart';
 import 'package:workify/features/admin/home/presentation/widgets/movement_item.dart';
@@ -19,11 +20,11 @@ class AdminHomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Day Movements',
+                  'admin_home.day_movements'.tr(),
                   style: AppFontStyle.bold19,
                 ),
                 Text(
-                  'See All',
+                  'admin_home.see_all'.tr(),
                   style: AppFontStyle.regular14Purple,
                 ),
               ],

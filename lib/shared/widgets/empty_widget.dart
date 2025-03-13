@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:workify/core/utils/theme/app_font_stlyles.dart';
@@ -17,7 +18,7 @@ class EmptyWidgetState extends StatelessWidget {
         Expanded(child: SvgPicture.asset(AppImages.assetsImagesEmptyState)),
         Center(
           child: Text(
-            'There is No Data Try to Add New',
+            'emp_list.no_data'.tr(),
             style: AppFontStyle.semiBold22,
             textAlign: TextAlign.center,
           ),
