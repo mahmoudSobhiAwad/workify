@@ -114,7 +114,11 @@
   },
   "fingerprint": {
     "check_in": "حضور",
-    "check_out": "انصراف"
+    "check_in_success": "نجاح قي تسجيل الحضور",
+    "check_in_failed": "فشل في تسجيل الحضور",
+    "check_out": "انصراف",
+    "check_out_success": "نجاح في تسجيل الخروج",
+    "check_out_failed": "فشل في تسجيل الخروج"
   }
 
 }

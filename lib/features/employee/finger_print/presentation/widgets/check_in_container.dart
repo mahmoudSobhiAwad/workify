@@ -33,7 +33,7 @@ class CheckInContainer extends StatelessWidget {
               CustomToast(
                 context: context,
                 type: ToastificationType.warning,
-                header: "Check-In Failed",
+                header: 'fingerprint.check_in_failed'.tr(),
                 description: "You already have checked in before",
               ).showBottomToast();
             },

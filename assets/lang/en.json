@@ -113,7 +113,11 @@
   },
   "fingerprint": {
     "check_in": "Check In",
-    "check_out": "Check Out"
+    "check_in_success": "Check In Successfully",
+    "check_in_failed": "Check In Failed",
+    "check_out": "Check Out",
+    "check_out_success": "Check Out Successfully",
+    "check_out_failed": "Check Out Failed"
   }
 
 }

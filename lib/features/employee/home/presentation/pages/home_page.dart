@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:workify/core/utils/theme/app_colors.dart';
@@ -44,7 +45,7 @@ class HomePage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Hello,',
+                            "emp_home.hello".tr(),
                             style: AppFontStyle.medium15,
                           ),
                           Text(
@@ -73,7 +74,7 @@ class HomePage extends StatelessWidget {
                             child: [
                               Column(
                                 children: [
-                                  Text("Total Salary",style: AppFontStyle.semiBold14,),
+                                  Text("emp_home.total".tr(),style: AppFontStyle.semiBold14,),
                                   SizedBox(
                                     height: 16,
                                   ),
@@ -85,7 +86,7 @@ class HomePage extends StatelessWidget {
                               ),
                               Column(
                                 children: [
-                                  Text("Leave Balance",style: AppFontStyle.semiBold14),
+                                  Text("emp_home.balance".tr(),style: AppFontStyle.semiBold14),
                                   SizedBox(
                                     height: 16,
                                   ),
@@ -114,7 +115,7 @@ class HomePage extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    'Movements',
+                    "emp_home.movements".tr(),
                     style: AppFontStyle.bold19,
                   ),
                   Spacer(),
