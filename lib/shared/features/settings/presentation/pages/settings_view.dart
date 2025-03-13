@@ -1,11 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:workify/core/routing/routes.dart';
 import 'package:workify/core/storage/cache_helper.dart';
 import 'package:workify/core/utils/theme/app_colors.dart';
 import 'package:workify/core/utils/theme/app_font_stlyles.dart';
 import 'package:workify/core/utils/theme/app_icons.dart';
 import 'package:workify/shared/features/settings/presentation/widgets/custom_settings_item.dart';
+import 'package:workify/shared/widgets/custom_two_option_dialog.dart';
 
 class SettingView extends StatelessWidget {
   const SettingView({super.key});
@@ -105,16 +108,20 @@ class SettingView extends StatelessWidget {
             height: 30,
           ),
           CustomSettingsItem(
-            label: 'settings.change_password'.tr(),
-            iconPath: AppIcons.assetsIconsChangePassIcon,
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          CustomSettingsItem(
             onTap: () async {
-              print("d");
-              await AppSharedPreferences.clearAll();
+              showDialog(
+                  context: context,
+                  builder: (context) => CustomTwoOptionDialog(
+                      title: "Are you sure to LogOut",
+                      buttonTitle: "Log out",
+                      backGroundColor: AppColors.red35,
+                      onTap: () async {
+                        await AppSharedPreferences.clearAll().then((value) {
+                          context.mounted
+                              ? context.go(Routes.roleSelectPage)
+                              : null;
+                        });
+                      }));
             },
             label: 'settings.logout'.tr(),
             iconPath: AppIcons.assetsIconsLogOutIcon,

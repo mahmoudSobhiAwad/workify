@@ -4,9 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:workify/core/utils/theme/app_colors.dart';
 import 'package:workify/core/utils/theme/app_font_stlyles.dart';
 import 'package:workify/core/utils/theme/app_icons.dart';
-import 'package:workify/features/employee/home/presentation/widgets/attendence_container.dart';
 import 'package:workify/features/employee/home/presentation/widgets/movement_item.dart';
-import 'package:workify/features/employee/home/presentation/widgets/salary_container.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -95,7 +93,8 @@ class HomePage extends StatelessWidget {
                                     backgroundColor: AppColors.green53,
                                     child: Text(
                                       '4',
-                                      style: AppFontStyle.semiBold18.copyWith(color: AppColors.whiteff),
+                                      style: AppFontStyle.semiBold18
+                                          .copyWith(color: AppColors.whiteff),
                                     ),
                                   ),
                                 ],
@@ -129,7 +128,6 @@ class HomePage extends StatelessWidget {
                 padding: EdgeInsets.only(
                   left: 16,
                   right: 16,
-                 
                 ),
                 children: [
                   MovementItem(
