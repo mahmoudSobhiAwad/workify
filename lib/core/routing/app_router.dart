@@ -11,15 +11,18 @@ import 'package:workify/core/utils/constants/app_strings.dart';
 import 'package:workify/core/utils/constants/enums.dart';
 import 'package:workify/features/admin/auth/presentation/pages/admin_login_view.dart';
 import 'package:workify/features/admin/auth/presentation/pages/admin_sign_up_view.dart';
+import 'package:workify/features/admin/company/data/models/company_model.dart';
 import 'package:workify/features/admin/company/presentation/pages/company_setup_view.dart';
 import 'package:workify/features/admin/company/presentation/pages/goolge_map_view.dart';
-import 'package:workify/features/admin/users/data/models/notification_model.dart';
+import 'package:workify/features/admin/users/data/models/employee_model.dart';
 import 'package:workify/features/admin/users/presentation/cubit/employee_cubit.dart';
 import 'package:workify/features/admin/users/presentation/pages/update_user_view.dart';
-import 'package:workify/shared/features/basic_preview/data/models/bottom_nav_bar_model.dart';
+import 'package:workify/features/employee/company_select/presentation/company_select_page.dart';
 import 'package:workify/shared/features/basic_preview/presentation/pages/basic_preview.dart';
 import 'package:workify/shared/features/on_boarding/presentation/pages/get_started_page.dart';
 import 'package:workify/shared/features/on_boarding/presentation/pages/role_select_page.dart';
+
+import '../../features/employee/login/presentation/pages/employee_login_page.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: getInitalRoute(),
@@ -79,13 +82,9 @@ final GoRouter router = GoRouter(
           return CustomTransitionPage(
             key: state.pageKey,
             child: BasicPreview(
-              pages: [
-                SizedBox(),
-                SizedBox(),
-                SizedBox(),
-              ],
-              bottomNavBarIconsList:
-                  args?[AppStrings.bottomNavList] as List<BottomNavBarModel>,
+              initialIndex: args?[AppStrings.initalIndex] ?? 0,
+              pages: employeeHomePages,
+              bottomNavBarIconsList: employeeHomeNavBarList,
             ),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
@@ -104,7 +103,7 @@ final GoRouter router = GoRouter(
             key: state.pageKey,
             child: UpdateUserView(
               cubit: args['cubit'] as EmployeeCubit,
-              model: args['model'] as EmployeeModel,
+              model: args['model'] as EmployeeModel?,
             ),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
@@ -175,6 +174,40 @@ final GoRouter router = GoRouter(
           return CustomTransitionPage(
             key: state.pageKey,
             child: AdminSignupPage(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+          );
+        }),
+    GoRoute(
+        path: Routes.employeeLogin,
+        pageBuilder: (context, state) {
+          // final args = state.extra as Map;
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: EmployeeLoginPage(
+              companyModel: state.extra as CompanyModel,
+            ),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+          );
+        }),
+    GoRoute(
+        path: Routes.companySelectPage,
+        pageBuilder: (context, state) {
+          // final args = state.extra as Map;
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: CompanySelectPage(),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
               return FadeTransition(

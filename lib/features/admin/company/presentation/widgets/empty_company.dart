@@ -11,8 +11,10 @@ class ComapnyEmptyStateView extends StatelessWidget {
   const ComapnyEmptyStateView({
     super.key,
     required this.companyId,
+    required this.refresh,
   });
   final String companyId;
+  final void Function() refresh;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -37,7 +39,10 @@ class ComapnyEmptyStateView extends StatelessWidget {
             onTap: () {
               context.push(Routes.companySetupPage, extra: {
                 "id": companyId,
-                
+              }).then((value) {
+                if (value != null && value == true) {
+                  refresh();
+                }
               });
             },
             backgroundColor: AppColors.green53,

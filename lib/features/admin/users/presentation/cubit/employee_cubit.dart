@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:workify/core/storage/cache_helper.dart';
 import 'package:workify/core/utils/constants/app_strings.dart';
-import 'package:workify/features/admin/users/data/models/notification_model.dart';
+import 'package:workify/features/admin/users/data/models/employee_model.dart';
 
 part 'employee_state.dart';
 

@@ -19,7 +19,7 @@ class CompanyModel {
       required this.endTime,
       required this.holidayList});
   factory CompanyModel.fromJson(Map<String, dynamic> json) {
-    List<Timestamp> timestamps = List<Timestamp>.from(json["holidayDays"]);
+    List<Timestamp> timestamps =json['holidayDays']!=null? List<Timestamp>.from(json["holidayDays"]):[];
 
     return CompanyModel(
         companyId: json['id'],

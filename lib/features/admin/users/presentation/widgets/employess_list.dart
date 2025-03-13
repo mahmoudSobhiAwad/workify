@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:workify/features/admin/users/data/models/notification_model.dart';
+import 'package:workify/features/admin/users/data/models/employee_model.dart';
 import 'package:workify/features/admin/users/presentation/cubit/employee_cubit.dart';
 import 'package:workify/features/admin/users/presentation/widgets/custom_user_item.dart';
 import 'package:workify/shared/widgets/empty_widget.dart';

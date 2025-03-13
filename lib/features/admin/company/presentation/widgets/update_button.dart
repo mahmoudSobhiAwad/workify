@@ -39,9 +39,7 @@ class CustomUpdateButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CompanySetupCubit, CompanySetupState>(
-      buildWhen: (prev, curr) {
-        return curr is UpdateCompanyStates;
-      },
+     
       listener: (context, state) {
         if (state is SuccessUpdateCompanyStates) {
           CustomToast(

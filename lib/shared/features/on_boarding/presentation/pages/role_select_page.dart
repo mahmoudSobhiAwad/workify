@@ -81,24 +81,17 @@ class _RoleSelectPageState extends State<RoleSelectPage> {
               ),
             ),
             CustomPushButton(
-              onTap: () {
-                if (_selectedRole == 0) {
-                  context.push(Routes.adminLogin);
-                  /*context.go(Routes.basicPreview, extra: {
-                    "pages": [
-                      AdminHomePage(),
-                      UserPageView(),
-                      CompanyPageView(),
-                      SettingView(),
-                    ],
-                   
-                  });*/
-                } else {
-                  //TODO edit to go to employee
-                }
-              },
+              onTap: _selectedRole != -1
+                  ? () {
+                      if (_selectedRole == 0) {
+                        context.push(Routes.adminLogin);
+                      } else {
+                        context.push(Routes.companySelectPage);
+                      }
+                    }
+                  : null,
               margin: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-              backgroundColor: AppColors.purblePrimary,
+              backgroundColor: _selectedRole == -1?AppColors.whiteWithOpacity10: AppColors.purblePrimary,
               child: Row(
                 spacing: 5,
                 mainAxisAlignment: MainAxisAlignment.center,

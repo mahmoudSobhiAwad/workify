@@ -13,4 +13,5 @@ class AppColors {
   static const purblePrimary = Color(0xff7B61FF);
   static const yellow3c = Color(0xffB68B3C);
   static const grayB2 = Color(0xffAEA8B2);
+  static const black30 = Color(0xff3e4752);
 }

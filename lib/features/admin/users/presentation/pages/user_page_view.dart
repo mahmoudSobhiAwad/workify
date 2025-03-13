@@ -65,6 +65,12 @@ class UserPageView extends StatelessWidget {
                               onTap: () {
                                 context.push(Routes.updateUser, extra: {
                                   'cubit': context.read<EmployeeCubit>()
+                                }).then((value) {
+                                  if (value != null &&
+                                      value == true &&
+                                      context.mounted) {
+                                    context.read<EmployeeCubit>().getAllUsers();
+                                  }
                                 });
                               },
                               borderRadius: 4,

@@ -30,8 +30,15 @@ class CompanyPageView extends StatelessWidget {
                     context.read<CompanyCubit>().loadCompanySetup();
                   },
                 )
-              : ComapnyEmptyStateView(
-                  companyId: context.read<CompanyCubit>().id,
+              : BlocBuilder<CompanyCubit, CompanyState>(
+                  builder: (context, state) {
+                    return ComapnyEmptyStateView(
+                      refresh: () {
+                        context.read<CompanyCubit>().loadCompanySetup();
+                      },
+                      companyId: context.read<CompanyCubit>().id,
+                    );
+                  },
                 );
         }
         return SizedBox();
