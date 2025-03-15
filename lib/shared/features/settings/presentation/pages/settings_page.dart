@@ -75,27 +75,7 @@ class SettingPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 24),
-              ExpansionTile(
-                leading: SvgPicture.asset(AppIcons.assetsIconsLanguageIcon),
-                title: Text(
-                  "settings.language".tr(),
-                  style: AppFontStyle.medium15,
-                ),
-                children: [
-                  ListTile(
-                    title: Text('English'),
-                    onTap: () {
-                      // Handle language change
-                    },
-                  ),
-                  ListTile(
-                    title: Text('Arabic'),
-                    onTap: () {
-                      // Handle language change
-                    },
-                  ),
-                ],
-              ),
+             
               ListTile(
                 leading: SvgPicture.asset(AppIcons.assetsIconsChangePassIcon),
                 title: Text(

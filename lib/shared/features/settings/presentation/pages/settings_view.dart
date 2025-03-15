@@ -79,28 +79,30 @@ class SettingView extends StatelessWidget {
               SizedBox(
                 width: 10,
               ),
-              PopupMenuButton(
-                itemBuilder: (BuildContext context) {
-                  return [
-                    PopupMenuItem(
-                      onTap: () {
-                        context.setLocale(
-                          Locale('en'),
-                        );
-                      },
-                      child: Text("English"),
-                    ),
-                    PopupMenuItem(
-                      onTap: () {
-                        context.setLocale(
-                          Locale('ar'),
-                        );
-                      },
-                      child: Text("العربية"),
-                    ),
-                  ];
-                },
-                child: SvgPicture.asset(AppIcons.assetsIconsArrowDownIcon),
+              ExpansionTile(
+                leading: SvgPicture.asset(AppIcons.assetsIconsLanguageIcon),
+                title: Text(
+                  "settings.language".tr(),
+                  style: AppFontStyle.medium15,
+                ),
+                children: [
+                  ListTile(
+                    title: Text("English"),
+                    onTap: () {
+                      context.setLocale(
+                        Locale('en'),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    title: Text("العربية"),
+                    onTap: () {
+                      context.setLocale(
+                        Locale('ar'),
+                      );
+                    },
+                  ),
+                ],
               ),
             ],
           ),
