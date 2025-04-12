@@ -1,12 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workify/core/utils/theme/app_colors.dart';
 import 'package:workify/core/utils/theme/app_font_stlyles.dart';
 import 'package:workify/core/utils/theme/app_icons.dart';
 import 'package:workify/features/admin/home/presentation/widgets/custom_attendance_container.dart';
-
-import 'package:workify/features/admin/home/presentation/cubit/home_cubit.dart';
 
 class QuickOverView extends StatelessWidget {
   const QuickOverView({
@@ -15,7 +12,6 @@ class QuickOverView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit=context.read<HomeCubit>();
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
       decoration: BoxDecoration(
@@ -77,7 +73,7 @@ class QuickOverView extends StatelessWidget {
                   radius: 25,
                   backgroundColor: AppColors.purblePrimary,
                   child: Text(
-                    cubit.movements.length.toString(),
+                    "0",
                     style: AppFontStyle.bold21,
                   ),
                 )

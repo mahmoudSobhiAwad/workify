@@ -1,18 +1,31 @@
+import 'dart:convert';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workify/core/routing/routes.dart';
 import 'package:workify/core/storage/cache_helper.dart';
+import 'package:workify/core/utils/constants/app_strings.dart';
 import 'package:workify/core/utils/theme/app_colors.dart';
 import 'package:workify/core/utils/theme/app_font_stlyles.dart';
 import 'package:workify/core/utils/theme/app_icons.dart';
-import 'package:workify/shared/features/settings/presentation/widgets/custom_settings_item.dart';
 import 'package:workify/shared/widgets/custom_two_option_dialog.dart';
 
-class SettingView extends StatelessWidget {
+class SettingView extends StatefulWidget {
   const SettingView({super.key});
 
+  @override
+  State<SettingView> createState() => _SettingViewState();
+}
+
+class _SettingViewState extends State<SettingView> {
+  final String? fullName =
+      jsonDecode(AppSharedPreferences.getString(key: AppStrings.userModelKey)!)[
+          'fullName'];
+  final String? email =
+      jsonDecode(AppSharedPreferences.getString(key: AppStrings.userModelKey)!)[
+          'userName'];
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -45,12 +58,13 @@ class SettingView extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    if (fullName != null)
+                      Text(
+                        fullName ?? "",
+                        style: AppFontStyle.medium16,
+                      ),
                     Text(
-                      "Mahmoud Sobhi",
-                      style: AppFontStyle.medium16,
-                    ),
-                    Text(
-                      "ali.obaidy178@gmail.com",
+                      "$email",
                       style: AppFontStyle.regular14,
                     )
                   ],
@@ -61,56 +75,40 @@ class SettingView extends StatelessWidget {
           SizedBox(
             height: 30,
           ),
-          Row(
+          ExpansionTile(
+            leading: SvgPicture.asset(AppIcons.assetsIconsLanguageIcon),
+            title: Text(
+              "settings.language".tr(),
+              style: AppFontStyle.medium15,
+            ),
             children: [
-              SvgPicture.asset(AppIcons.assetsIconsLanguageIcon),
-              SizedBox(
-                width: 10,
+              ListTile(
+                title: Text("English"),
+                onTap: () {
+                  context.setLocale(
+                    Locale('en'),
+                  );
+                },
               ),
-              Text(
-                "settings.language".tr(),
-                style: AppFontStyle.regular16,
-              ),
-              Spacer(),
-              Text(
-                context.locale.languageCode == 'ar' ? 'العربية' : "English",
-                style: AppFontStyle.regular16,
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              ExpansionTile(
-                leading: SvgPicture.asset(AppIcons.assetsIconsLanguageIcon),
-                title: Text(
-                  "settings.language".tr(),
-                  style: AppFontStyle.medium15,
-                ),
-                children: [
-                  ListTile(
-                    title: Text("English"),
-                    onTap: () {
-                      context.setLocale(
-                        Locale('en'),
-                      );
-                    },
-                  ),
-                  ListTile(
-                    title: Text("العربية"),
-                    onTap: () {
-                      context.setLocale(
-                        Locale('ar'),
-                      );
-                    },
-                  ),
-                ],
+              ListTile(
+                title: Text("العربية"),
+                onTap: () {
+                  context.setLocale(
+                    Locale('ar'),
+                  );
+                },
               ),
             ],
           ),
-          SizedBox(
-            height: 30,
-          ),
-          CustomSettingsItem(
-            onTap: () async {
+          ListTile(
+            leading: SvgPicture.asset(
+              AppIcons.assetsIconsLogOutIcon,
+            ),
+            title: Text(
+              "settings.logout".tr(),
+              style: AppFontStyle.medium15,
+            ),
+            onTap: () {
               showDialog(
                   context: context,
                   builder: (context) => CustomTwoOptionDialog(
@@ -125,9 +123,7 @@ class SettingView extends StatelessWidget {
                         });
                       }));
             },
-            label: 'settings.logout'.tr(),
-            iconPath: AppIcons.assetsIconsLogOutIcon,
-          )
+          ),
         ],
       ),
     );
