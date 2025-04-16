@@ -19,8 +19,10 @@ class AuthRepoImpl implements AuthRepo {
       final result = await firebaseAuth.createUserWithEmailAndPassword(
           email: model.email, password: model.password);
       await AppSharedPreferences.setString(
-          value:
-              jsonEncode({"role": UserRoleEnum.admin.name, "id": result.user?.uid}),
+          value: jsonEncode({
+            "role": UserRoleEnum.admin.name,
+            "id": result.user?.uid,
+          }),
           key: AppStrings.userModelKey);
       return right(result.user?.uid);
     } on FirebaseAuthException catch (error) {
@@ -34,8 +36,10 @@ class AuthRepoImpl implements AuthRepo {
       final result = await firebaseAuth.signInWithEmailAndPassword(
           email: model.email, password: model.password);
       await AppSharedPreferences.setString(
-          value:
-              jsonEncode({"role": UserRoleEnum.admin.name, "id": result.user?.uid}),
+          value: jsonEncode({
+            "role": UserRoleEnum.admin.name,
+            "id": result.user?.uid,
+          }),
           key: AppStrings.userModelKey);
       return right(result.user?.uid);
     } on FirebaseAuthException catch (error) {

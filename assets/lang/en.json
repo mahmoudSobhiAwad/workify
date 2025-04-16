@@ -1,9 +1,8 @@
 {
-  "get_started":{
-    "get_started":"Get Started",
-    "subtitle":"Together we can make a huge success",
+  "get_started": {
+    "get_started": "Get Started",
+    "subtitle": "Together we can make a huge success",
     "title": "Workify"
-
   },
   "role_select": {
     "manager": "Manager",
@@ -22,7 +21,8 @@
   },
   "admin_signup": {
     "sign_up": "Sign Up",
-    "email": "Email","first_name": "First Name",
+    "email": "Email",
+    "first_name": "First Name",
     "last_name": "Last Name",
     "password": "Password",
     "confirm_password": "Confirm Password",
@@ -33,10 +33,10 @@
     "hello": "Hello",
     "total": "Total Employees",
     "on_time": "On Time",
-    "delayed":"Delayed",
+    "delayed": "Delayed",
     "absent": "absent",
     "day_movements": "Day Movements",
-    "see_all":"See All",
+    "see_all": "See All",
     "emp_name": "Employee Name",
     "check_in": "Check In",
     "check_out": "Check Out"
@@ -100,7 +100,6 @@
     "search": "Search",
     "next": "Next"
   },
-
   "emp_home": {
     "hello": "Hello",
     "total": "Total Salary",
@@ -117,6 +116,16 @@
     "check_out": "Check Out",
     "check_out_success": "Check Out Successfully",
     "check_out_failed": "Check Out Failed"
-  }
-
+  },
+  "company_logo": "Company Logo",
+  "company_name": "Company Name",
+  "company_name_cant_be_empty": "Company Name can't be empty",
+  "onsite": "OnSite",
+  "open_map": "Open Map",
+  "day_time_duration": "Day Time Duration",
+  "month": "Month",
+  "company_setup_save": "Save",
+  "company_setup_success": "Company is Setup Successfully!",
+  "company_setup_location_missing": "Location is Missing",
+  "holiday_days": "Holiday Days"
 }

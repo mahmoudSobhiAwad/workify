@@ -1,9 +1,8 @@
 {
-  "get_started":{
-    "get_started":"أبدأ",
-    "subtitle":"معا نستطيع صناعة نجاح كبير",
+  "get_started": {
+    "get_started": "أبدأ",
+    "subtitle": "معا نستطيع صناعة نجاح كبير",
     "title": "Workify"
-
   },
   "role_select": {
     "manager": "مدير",
@@ -22,7 +21,8 @@
   },
   "admin_signup": {
     "sign_up": "انشاء حساب",
-    "email": "Email","first_name": "الاسم الاول",
+    "email": "البريد الالكترونى",
+    "first_name": "الاسم الاول",
     "last_name": "الاسم الاخير",
     "password": "كلمة المرور",
     "confirm_password": "تأكيد كلمة المرور",
@@ -33,10 +33,10 @@
     "hello": "مرحباً،",
     "total": "اجمالى الموظفين",
     "on_time": "على الوقت",
-    "delayed":"متاخر",
+    "delayed": "متاخر",
     "absent": "غياب",
     "day_movements": "تحركات اليوم",
-    "see_all":"رؤية الكل",
+    "see_all": "رؤية الكل",
     "emp_name": "اسم الموظف",
     "check_in": "حضور",
     "check_out": "انصراف"
@@ -102,7 +102,6 @@
     "search": "بحث",
     "next": "التالى"
   },
-
   "emp_home": {
     "hello": "مرحباً",
     "total": "اجمالي الراتب",
@@ -119,6 +118,16 @@
     "check_out": "انصراف",
     "check_out_success": "نجاح في تسجيل الخروج",
     "check_out_failed": "فشل في تسجيل الخروج"
-  }
-
+  },
+  "company_logo": "شعار الشركة",
+  "company_name": "اسم الشركة",
+  "company_name_cant_be_empty": "لا يمكن أن يكون اسم الشركة فارغًا",
+  "onsite": "في الموقع",
+  "open_map": "فتح الخريطة",
+  "day_time_duration": "مدة الوقت اليومي",
+  "month": "شهر",
+  "company_setup_save": "حفظ",
+  "company_setup_success": "تم إعداد الشركة بنجاح!",
+  "company_setup_location_missing": "الموقع مفقود",
+  "holiday_days": "أيام العطلات"
 }

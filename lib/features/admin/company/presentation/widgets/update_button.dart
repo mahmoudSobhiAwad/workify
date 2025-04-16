@@ -10,7 +10,7 @@ import 'package:workify/features/admin/company/presentation/cubit/company_setup_
 import 'package:workify/shared/features/on_boarding/presentation/widgets/custom_push_button.dart';
 import 'package:workify/shared/functions/custom_toaster.dart';
 import 'package:workify/shared/models/image_model.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 
 class CustomUpdateButton extends StatelessWidget {
   const CustomUpdateButton({
@@ -39,15 +39,14 @@ class CustomUpdateButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CompanySetupCubit, CompanySetupState>(
-     
       listener: (context, state) {
         if (state is SuccessUpdateCompanyStates) {
           CustomToast(
                   context: context,
-                  header: "Company is Setup Successfully !",
+                  header: "company_setup_success".tr(),
                   type: ToastificationType.success)
               .showBottomToast();
-          Future.delayed(Duration(seconds: 1), () {
+          Future.delayed(const Duration(seconds: 1), () {
             if (context.mounted) {
               context.pop(true);
             }
@@ -80,7 +79,9 @@ class CustomUpdateButton extends StatelessWidget {
                     context.read<CompanySetupCubit>().createCompany(model);
                   }
                 } else {
-                  CustomToast(context: context, header: "Location is Missing")
+                  CustomToast(
+                          context: context,
+                          header: "company_setup_location_missing".tr())
                       .showBottomToast();
                 }
               }
@@ -89,10 +90,10 @@ class CustomUpdateButton extends StatelessWidget {
             }
           },
           backgroundColor: AppColors.green53,
-          margin: EdgeInsets.all(16),
+          margin: const EdgeInsets.all(16),
           child: Center(
             child: Text(
-              "Save",
+              "company_setup_save".tr(),
               style: AppFontStyle.semiBold16,
             ),
           ),
@@ -101,4 +102,3 @@ class CustomUpdateButton extends StatelessWidget {
     );
   }
 }
-

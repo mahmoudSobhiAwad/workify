@@ -17,17 +17,29 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
-        return windows;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for windows - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -40,49 +52,11 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBd5DBTcg9dLeO8TAdBbZQIeg3mhccAccQ',
-    appId: '1:1042958209407:web:317375b5114afc9796ca4a',
-    messagingSenderId: '1042958209407',
-    projectId: 'workify-b1e27',
-    authDomain: 'workify-b1e27.firebaseapp.com',
-    storageBucket: 'workify-b1e27.firebasestorage.app',
-    measurementId: 'G-7XFMRPKNFB',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyA24cvYTyEDxH655RmJi-LX1PZGRPtEwy4',
-    appId: '1:1042958209407:android:2c60300bc86e0abd96ca4a',
-    messagingSenderId: '1042958209407',
-    projectId: 'workify-b1e27',
-    storageBucket: 'workify-b1e27.firebasestorage.app',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBSKOMiYvm5bmyIPNc1aehixGQbGc3_GmU',
-    appId: '1:1042958209407:ios:d5a5bfc2ff069e6896ca4a',
-    messagingSenderId: '1042958209407',
-    projectId: 'workify-b1e27',
-    storageBucket: 'workify-b1e27.firebasestorage.app',
-    iosBundleId: 'com.example.workify',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBSKOMiYvm5bmyIPNc1aehixGQbGc3_GmU',
-    appId: '1:1042958209407:ios:d5a5bfc2ff069e6896ca4a',
-    messagingSenderId: '1042958209407',
-    projectId: 'workify-b1e27',
-    storageBucket: 'workify-b1e27.firebasestorage.app',
-    iosBundleId: 'com.example.workify',
-  );
-
-  static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyBd5DBTcg9dLeO8TAdBbZQIeg3mhccAccQ',
-    appId: '1:1042958209407:web:8ee0303c302c6b4f96ca4a',
-    messagingSenderId: '1042958209407',
-    projectId: 'workify-b1e27',
-    authDomain: 'workify-b1e27.firebaseapp.com',
-    storageBucket: 'workify-b1e27.firebasestorage.app',
-    measurementId: 'G-H2ZE44D3D5',
+    apiKey: 'AIzaSyAAemue4CUCLfjwD9Jv9yBkofGQta3cfN4',
+    appId: '1:790586731366:android:99206215dd9afb156b76a7',
+    messagingSenderId: '790586731366',
+    projectId: 'test-project-25eb4',
+    storageBucket: 'test-project-25eb4.firebasestorage.app',
   );
 }
