@@ -6,23 +6,24 @@ part 'company_selector_state.dart';
 
 class CompanySelectorCubit extends Cubit<CompanySelectorState> {
   CompanySelectorCubit() : super(CompanySelectorInitial());
-  final _firestore = FirebaseFirestore.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   Future<void> loadAllCompanies() async {
     try {
       emit(LoadingGetAllCompainesState());
+      
       final result = await _firestore.collection("companies").get();
 
       List<CompanyModel> data = [];
 
       for (var item in result.docs) {
-        final result = await _firestore
+        final outPut = await _firestore
             .collection("companies")
             .doc(item.id)
             .collection("info")
             .doc("companyInfo")
             .get();
-        if (result.data() != null) {
-          data.add(CompanyModel.fromJson(result.data()!));
+        if (outPut.data() != null) {
+          data.add(CompanyModel.fromJson(outPut.data()!));
         }
       }
       emit(SuccessGetAllCompainesState(compainesList: data));

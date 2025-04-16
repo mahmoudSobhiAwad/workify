@@ -22,6 +22,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^9.0.0
+  flutter_launcher_icons: ^0.14.3
   flutter_native_splash: ^2.4.4
   flutter_svg: ^2.0.17
   geocoding: ^3.0.0
@@ -92,3 +93,7 @@ flutter_native_splash:
     image: assets/images/native_splash_logo.png
 
   web: false
+
+flutter_launcher_icons:
+  android: "ic_launcher"
+  image_path: "assets/images/native_splash_logo.png"

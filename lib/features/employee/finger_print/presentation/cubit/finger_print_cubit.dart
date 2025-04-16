@@ -74,6 +74,7 @@ class FingerPrintCubit extends Cubit<FingerPrintState> {
   }
 
   Future<void> makeMovement(MovementModel movementModel) async {
+    print(movementModel.toMap());
     try {
       emit(LoadingAddMovementState());
       String formattedDay = DateFormat('d MMM yyyy').format(DateTime.now());

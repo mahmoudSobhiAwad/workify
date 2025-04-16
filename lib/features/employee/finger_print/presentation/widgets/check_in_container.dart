@@ -24,7 +24,7 @@ class CheckInContainer extends StatelessWidget {
       onTap: movementModel?.checkIn == null
           ? () {
               context.read<FingerPrintCubit>().makeMovement(MovementModel(
-                    checkIn: movementModel?.checkIn,
+                    checkIn: DateTime.now(),
                     fullName: movementModel?.fullName,
                     checkOut: movementModel?.checkOut,
                   ));
